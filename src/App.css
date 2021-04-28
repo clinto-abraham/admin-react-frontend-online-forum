@@ -1,0 +1,203 @@
+
+body {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+.bottom-navbar-content{
+    text-align: left;
+    text-align-last: left;
+    padding: 20px;
+}
+.studentInfoHeader{
+    margin: 15px;
+    display: inline-flexbox;
+}
+/* form control css */
+label{
+    display: inline-block;
+    padding: 6px;
+}
+.padding-grid{
+    padding: 20px;
+}
+.grid {
+    padding: 20px;
+    
+}
+.box-teacher-1{
+    display: block;
+    padding: 20px;
+    text-align: right;
+}
+
+.box-teacher-1{
+    display: inline-block;
+    padding: 200px;
+}
+
+.form-box{
+    padding-top: 35px;
+    width: 500px;
+    text-align: left;
+    position: relative;
+    left: 25%;
+    padding-left: 50px;
+}
+
+.input-form{
+    width: 300px;
+    height: 30px;
+    position: relative;
+    right: 0px;
+}
+
+.courseSelect{
+    position: relative;
+    left: 8px;
+    opacity: 0.8;
+    border-radius: 10px;
+    width: 300px;
+    height: 30px;
+    display: inline-block;
+}
+
+.priceTag{
+    display: inline-block;
+    padding-left: 25px;
+    visibility: hidden;
+}
+
+.checkboxPrice {
+    margin : 15px;
+}
+
+.checkboxPrice:checked ~ .priceTag {
+    visibility: visible;
+}
+/* form ends here */
+
+/* introducing collapse navbar */
+.titleAdmin {
+    padding-top: 100px;
+    color: #080808;
+    font-family: sans-serif;
+    text-align: left;
+}
+.menu-content {
+    max-height: 0;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif; 
+    padding: 0 0 0 50px;
+    color: #070707;
+    text-decoration: none;
+    text-align: left;
+}
+
+.teacher-register{
+    padding: 40px;
+}
+.collapsible-menu {
+    background-color:#4e8eb8;
+    padding: 0px 30px;
+    color: rgb(243, 250, 248);
+    font-family: 'Roboto', sans-serif;
+    
+}
+.collapsible-menu ul {
+    list-style-type: none;
+    color: #f4eee8;
+    padding: 0;
+}
+.collapsible-menu li {
+    display:block;
+    padding: 8px;
+    text-decoration: none;
+}
+.link {
+    color: #FFF;
+    margin: 15px;
+  }
+  .link:hover {
+     color: #8fd9a8;
+     text-decoration: none;
+  }
+/* transform dropdown style */
+.collapsible-menu label {
+    font-size: 56px;
+    display: block;
+    cursor: pointer;
+    padding: 10px 0 10px 50px;
+}
+input#menu {
+    display: none;
+}
+
+input:checked ~ .menu-content {
+    max-height: 100%;
+}
+
+/* navbar top css ends here */
+
+/* Admin component css below */
+
+.form-admin{
+    padding: 20px;
+    
+}
+
+.form-actions{
+    padding : 30px;
+}
+
+.save{
+    margin: 8px;
+}
+
+.Accordion{
+    width: 180px;
+    
+    text-align: center;
+    margin: 20px;
+    padding: 0px;
+}
+.card-payday{
+    margin: 100px;
+    padding: 50px;
+}
+.assign-teacher-container{
+    margin: 20px;
+    
+    padding: 10px;
+}
+.navbar-control-static{
+    background-color: powderblue;
+}
+.padding-grid-top-bottom{
+    padding: 20px 0 ;
+}
+/* .account-settings page css starts here */
+.button-account{
+    margin: 20px;
+}
+.account-settings{
+    margin: 20px;
+}
+.textinput-account-settings{
+    width: 45%;
+
+}
+/* .account-settings page css ends here */
+/* bottom navbar css here below */
+.footer-link{
+    color: #495464;
+    text-decoration: none;
+    width: 32px;
+    border-radius: 25px;
+    height: 32px;
+  }
+  .bottom-container{
+    background-color: #bbbfca;
+    text-align: center;
+    padding: 50px 0 20px;
+  }
+/* bottom navbar css finishes here */
