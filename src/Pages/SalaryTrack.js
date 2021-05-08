@@ -1,7 +1,5 @@
 import React from "react";
-import BottomNavbar from "../bottomNavbar";
-import NavbarAdmin from "./NavbarAdmin/NavbarAdmin";
-
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -124,42 +122,46 @@ Row.propTypes = {
 };
 
 const rows = [
-  createData("Shalini", 15900, 'Teacher', 'Approved', 49, 3.99),
-  createData("Mariam", 23700, 'Teacher', 'Transfered', 4, 4.99),
-  createData("John", 26200, 'Admin', 'Pending', 65, 3.79),
-  createData("Roger Steve", 30500, 'Principal', 'Transfered', 43, 2.5),
-  createData("Ajimon", 35600, 'Staff','Pending', 39, 1.5),
+  createData("Shalini", 15900, "Teacher", "Approved", 49, 3.99),
+  createData("Mariam", 23700, "Teacher", "Transfered", 4, 4.99),
+  createData("John", 26200, "Admin", "Pending", 65, 3.79),
+  createData("Roger Steve", 30500, "Principal", "Transfered", 43, 2.5),
+  createData("Ajimon", 35600, "Staff", "Pending", 39, 1.5),
 ];
 
 const SalaryTrack = () => {
+  const user = JSON.parse(localStorage.getItem("account"));
+  const history = useHistory();
   return (
-    <div>
-      <NavbarAdmin />
-
-      <div className="padding-grid">
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell>Name of employee</TableCell>
-                <TableCell align="right">Total Amount</TableCell>
-                <TableCell align="right">Role</TableCell>
-                <TableCell align="right">Status</TableCell>
-                <TableCell align="right">Unique (ID)</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <Row key={row.name} row={row} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-
-      <BottomNavbar />
-    </div>
+    <>
+      {!user?.result?._id ? (
+        history.push("/")
+      ) : (
+        <>
+          <div className="padding-grid">
+            <TableContainer component={Paper}>
+              <Table aria-label="collapsible table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+                    <TableCell>Name of employee</TableCell>
+                    <TableCell align="right">Total Amount</TableCell>
+                    <TableCell align="right">Role</TableCell>
+                    <TableCell align="right">Status</TableCell>
+                    <TableCell align="right">Unique (ID)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <Row key={row.name} row={row} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
