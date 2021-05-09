@@ -1,4 +1,9 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
+import {
+  FETCH_STUDENTS,
+  CREATE,
+  UPDATE,
+  DELETE,
+} from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
 export const createStudent = (studentform) => async (dispatch) => {
@@ -13,7 +18,7 @@ export const createStudent = (studentform) => async (dispatch) => {
 export const getStudents = () => async (dispatch) => {
   try {
     const { data } = await api.fetchStudents();
-    dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: FETCH_STUDENTS, payload: data });
   } catch (error) {
     console.log(error);
   }

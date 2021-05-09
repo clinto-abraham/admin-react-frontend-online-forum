@@ -1,10 +1,10 @@
-import { FETCH_ALL, UPDATE } from "../constants/actionTypes";
+import { FETCH_ADMIN, UPDATE } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
 export const getAdmin = () => async (dispatch) => {
   try {
     const { data } = await api.fetchAdmin();
-    dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: FETCH_ADMIN, payload: data });
   } catch (error) {
     console.log(error);
   }

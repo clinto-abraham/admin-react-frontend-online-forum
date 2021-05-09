@@ -1,8 +1,8 @@
-import { FETCH_ALL, UPDATE } from "../constants/actionTypes";
+import { FETCH_ADMIN, UPDATE } from "../constants/actionTypes";
 
 function admin(admin = [], action) {
   switch (action.type) {
-    case FETCH_ALL:
+    case FETCH_ADMIN:
       return action.payload;
     case UPDATE:
       return admin.map((adminData) =>

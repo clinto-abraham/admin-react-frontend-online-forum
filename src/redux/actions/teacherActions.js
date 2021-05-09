@@ -1,10 +1,10 @@
-import { FETCH_ALL, UPDATE, DELETE } from "../constants/actionTypes";
+import { FETCH_TEACHERS, UPDATE, DELETE } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
 export const getTeachers = () => async (dispatch) => {
   try {
     const { data } = await api.fetchTeachers();
-    dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: FETCH_TEACHERS, payload: data });
   } catch (error) {
     console.log(error);
   }

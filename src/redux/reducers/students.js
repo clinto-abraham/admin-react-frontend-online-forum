@@ -1,8 +1,13 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/actionTypes";
+import {
+  FETCH_STUDENTS,
+  CREATE,
+  UPDATE,
+  DELETE,
+} from "../constants/actionTypes";
 
 function students(students = [], action) {
   switch (action.type) {
-    case FETCH_ALL:
+    case FETCH_STUDENTS:
       return action.payload;
     case CREATE:
       return [...students, action.payload];
