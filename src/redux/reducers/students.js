@@ -2,7 +2,7 @@ import {
   FETCH_STUDENTS,
   CREATE,
   UPDATE,
-  DELETE,
+  DELETE_STUDENT,
 } from "../constants/actionTypes";
 
 function students(students = [], action) {
@@ -15,7 +15,7 @@ function students(students = [], action) {
       return students.map((child) =>
         child._id === action.payload._id ? action.payload : child
       );
-    case DELETE:
+    case DELETE_STUDENT:
       return students.filter((child) => child._id !== action.payload);
     default:
       return students;

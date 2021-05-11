@@ -16,6 +16,9 @@ import { useDispatch } from "react-redux";
 import { getAdmin } from "./redux/actions/adminAction";
 import { getStudents } from "./redux/actions/studentAction";
 import { getTeachers } from "./redux/actions/teacherActions";
+import View from "./Pages/Page-Children/Students-Children/view";
+import Edit from "./Pages/edit";
+import StudentForm from "./Pages/studentForm";
 
 function App() {
   const [studentformData, setStudentformData] = useState(null);
@@ -52,8 +55,26 @@ function App() {
               setStudentformData={setStudentformData}
             />
           </Route>
+          <Route path="/student-form" exact>
+            <StudentForm
+              studentformData={studentformData}
+              setStudentformData={setStudentformData}
+            />
+          </Route>
           <Route path="/students-info" exact>
             <StudentInfo
+              studentformData={studentformData}
+              setStudentformData={setStudentformData}
+            />
+          </Route>
+          <Route path="/student-info/:id" exact>
+            <View
+              studentformData={studentformData}
+              setStudentformData={setStudentformData}
+            />
+          </Route>
+          <Route path="/edit-student-info/:id" exact>
+            <Edit
               studentformData={studentformData}
               setStudentformData={setStudentformData}
             />

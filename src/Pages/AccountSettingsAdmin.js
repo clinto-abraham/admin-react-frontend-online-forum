@@ -5,12 +5,11 @@ import { useSelector } from "react-redux";
 
 // import { useDispatch, useSelector } from 'react-redux';
 import FileBase from "react-file-base64";
-
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 // import { updateAdmin } from '../../actions/posts';
 //
 import {
   Avatar,
-  Box,
   Button,
   Card,
   CardContent,
@@ -82,18 +81,6 @@ const AccountSettingsAdmin = ({ props, adminData, setAdminData }) => {
     });
   };
 
-  const [values2, setValues2] = useState({
-    password: "",
-    confirm: "",
-  });
-
-  const handleChange2 = (event) => {
-    setValues2({
-      ...values2,
-      [event.target.name]: event.target.value,
-    });
-  };
-
   const classes = useStyles();
 
   return (
@@ -117,13 +104,16 @@ const AccountSettingsAdmin = ({ props, adminData, setAdminData }) => {
                   <CardContent>
                     <Grid container spacing={3}>
                       <Grid item md={6} xs={12}>
-                        <Avatar
-                          variant="square"
-                          className={classes.square}
-                          key={data.name}
-                        >
-                          {data.name[0]}
-                        </Avatar>
+                        <ListItemAvatar>
+                          <Avatar
+                            variant="square"
+                            className={classes.square}
+                            key={data.name}
+                            src={data.img}
+                          >
+                            {data.name[0]}
+                          </Avatar>
+                        </ListItemAvatar>
                         {/* photo below */}
                         <div className={classes.fileInput}>
                           <FileBase
@@ -132,7 +122,7 @@ const AccountSettingsAdmin = ({ props, adminData, setAdminData }) => {
                             onDone={({ base64 }) =>
                               setNewadminData({
                                 ...newadminData,
-                                selectedFile: base64,
+                                img: base64,
                               })
                             }
                           />

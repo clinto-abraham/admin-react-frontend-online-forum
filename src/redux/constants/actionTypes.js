@@ -1,6 +1,8 @@
 export const CREATE = "CREATE";
 export const UPDATE = "UPDATE";
 export const DELETE = "DELETE";
+export const DELETE_STUDENT = "DELETE_STUDENT";
+export const DELETE_TEACHER = "DELETE_TEACHER";
 export const FETCH_ALL = "FETCH_ALL";
 export const FETCH_STUDENTS = "FETCH_STUDENTS";
 export const FETCH_ADMIN = "FETCH_ADMIN";

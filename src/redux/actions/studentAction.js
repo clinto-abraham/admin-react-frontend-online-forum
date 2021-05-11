@@ -2,7 +2,7 @@ import {
   FETCH_STUDENTS,
   CREATE,
   UPDATE,
-  DELETE,
+  DELETE_STUDENT,
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
@@ -23,21 +23,21 @@ export const getStudents = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deleteStudent = (id) => async (dispatch) => {
+  try {
+    await await api.deleteStudent(id);
+    dispatch({ type: DELETE_STUDENT, payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};
 // alloted actions in above
 
 export const updateStudent = (id, post) => async (dispatch) => {
   try {
     const { data } = await api.updateStudent(id, post);
     dispatch({ type: UPDATE, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const deletePost = (id) => async (dispatch) => {
-  try {
-    await await api.deleteStudent(id);
-    dispatch({ type: DELETE, payload: id });
   } catch (error) {
     console.log(error);
   }

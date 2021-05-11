@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { Link, useHistory } from "react-router-dom";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -8,18 +8,17 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { useSelector } from "react-redux";
-//  <IconButton
-//             aria-label="expand row"
-//             size="small"
-//             onClick={() => setOpen(!open)}
-//           >
-//             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-//           </IconButton>
+import { useDispatch, useSelector } from "react-redux";
+import { Box, Button } from "@material-ui/core";
+import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
+import { deleteStudent } from "../redux/actions/studentAction";
+import EditDialog1 from "./Page-Children/Students-Children/edit-components/edit1";
+import View from "./Page-Children/Students-Children/view";
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.common.black,
   },
   body: {
     fontSize: 14,
@@ -43,13 +42,7 @@ const useStyles = makeStyles({
 function StudentInfo({ studentformData, setStudentformData }) {
   const students = useSelector((state) => state.students);
   console.log(students);
-  const [data, setData] = useState({
-    name: "",
-    contact: "",
-    studentname: "",
-    email: "",
-    rollNumber: "",
-  });
+  const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
@@ -58,42 +51,64 @@ function StudentInfo({ studentformData, setStudentformData }) {
       {!user?.result?._id ? (
         history.push("/")
       ) : (
-        <>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-                  <StyledTableCell align="right">Calories</StyledTableCell>
-                  <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-                  <StyledTableCell align="right">
-                    Carbs&nbsp;(g)
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    Protein&nbsp;(g)
-                  </StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <StyledTableRow key={data.name}>
-                  <StyledTableCell component="th" scope="row">
-                    {data.name}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{data.email}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    {data.studentname}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {data.rollNumber}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {data.contact}
-                  </StyledTableCell>
-                </StyledTableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </>
+        <div className="margin-grid-40">
+          <Box
+            boxShadow={3}
+            bgcolor="background.paper"
+            m={1}
+            p={1}
+            className="padding-grid"
+          >
+            <TableContainer component={Paper} className="padding-grid ">
+              <Table className={classes.table} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell align="left">VIEW</StyledTableCell>
+                    <StyledTableCell>NAME OF STUDENT </StyledTableCell>
+                    <StyledTableCell align="right">EMAIL</StyledTableCell>
+                    <StyledTableCell align="right">CLASS</StyledTableCell>
+                    <StyledTableCell align="right">EDIT</StyledTableCell>
+                    <StyledTableCell align="right">DELETE</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                {students.map((data) => (
+                  <TableBody>
+                    <StyledTableRow key={data.age}>
+                      <StyledTableCell align="left" key={data.rollNumber}>
+                        <View data={data} />
+                      </StyledTableCell>
+                      <StyledTableCell
+                        component="th"
+                        scope="row"
+                        key={data.fullname}
+                      >
+                        {data.fullname}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" key={data.email}>
+                        {data.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="right" key={data.class}>
+                        {data.class}
+                      </StyledTableCell>
+                      {data.contact}
+                      <StyledTableCell align="right" key={data._id}>
+                        <EditDialog1 data={data} />
+                      </StyledTableCell>
+                      <StyledTableCell align="right" key={data._id}>
+                        <Button
+                          key={data._id}
+                          onClick={() => dispatch(deleteStudent(data._id))}
+                        >
+                          <DeleteSweepIcon />
+                        </Button>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  </TableBody>
+                ))}
+              </Table>
+            </TableContainer>
+          </Box>
+        </div>
       )}
     </>
   );

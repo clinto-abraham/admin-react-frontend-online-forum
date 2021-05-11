@@ -2,7 +2,7 @@ import {
   FETCH_TEACHERS,
   CREATE,
   UPDATE,
-  DELETE,
+  DELETE_TEACHER,
 } from "../constants/actionTypes";
 
 function teachers(teachers = [], action) {
@@ -15,7 +15,7 @@ function teachers(teachers = [], action) {
       return teachers.map((teacherData) =>
         teacherData._id === action.payload._id ? action.payload : teacherData
       );
-    case DELETE:
+    case DELETE_TEACHER:
       return teachers.filter(
         (teacherData) => teacherData._id !== action.payload
       );
