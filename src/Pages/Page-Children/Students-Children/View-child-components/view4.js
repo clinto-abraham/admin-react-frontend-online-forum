@@ -4,9 +4,47 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { useHistory } from "react-router";
+import {
+  Button,
+  makeStyles,
+  Paper,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
+import React from "react";
 
-import React, { useEffect, useState } from "react";
-function StudentForm5({ data, firstStep, studentformData, handleSubmit }) {
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.common.black,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+  },
+}));
+
+export default function EditStudent({
+  data,
+  firstStep,
+  studentformData,
+  handleSubmit,
+}) {
   const classes = useStyles();
   const history = useHistory();
   function dashboard(e) {

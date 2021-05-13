@@ -138,22 +138,19 @@ export default function StudentForm() {
   const handleChange = (e) => {
     setStudentformData({ ...studentformData, [e.target.name]: e.target.value });
   };
-  console.log(studentformData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createStudent(studentformData));
-    // console.log("I am clicked, check to un comment the dispatch actions");
   };
 
   const [state, setState] = useState(0);
-  // Proceed to next step
+
   const nextStep = (e) => {
     e.preventDefault();
     setState(state + 1);
-    handleSubmit(e);
   };
 
-  // Go back to prev step
   const prevStep = (e) => {
     e.preventDefault();
     setState(state - 1);

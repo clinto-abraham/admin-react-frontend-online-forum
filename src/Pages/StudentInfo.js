@@ -12,8 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Button } from "@material-ui/core";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import { deleteStudent } from "../redux/actions/studentAction";
-import EditDialog1 from "./Page-Children/Students-Children/edit-components/edit1";
 import View from "./Page-Children/Students-Children/view";
+import EditIcon from "@material-ui/icons/Edit";
+import EditStudent from "./edit";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -93,8 +94,11 @@ function StudentInfo() {
                       </StyledTableCell>
                       {data.contact}
                       <StyledTableCell align="right" key={data._id}>
-                        <Link to="/students-info/:id">
-                          <EditDialog1 data={data} />
+                        <Link to="/edit-student-info/:id">
+                          <EditStudent data={data}>
+                            {" "}
+                            <EditIcon />{" "}
+                          </EditStudent>
                         </Link>
                       </StyledTableCell>
                       <StyledTableCell align="right" key={data._id}>

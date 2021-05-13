@@ -22,6 +22,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     flex: 1,
   },
+  grid: {
+    padding: "30px",
+    marging: "40",
+  },
+  listItemstyle: {
+    marginLeft: "100px",
+  },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -45,6 +52,7 @@ export default function View({ data }) {
       <Button onClick={handleClickOpen}>
         <VisibilityIcon />
       </Button>
+
       <Dialog
         fullScreen
         open={open}
@@ -70,65 +78,69 @@ export default function View({ data }) {
           </Toolbar>
         </AppBar>
 
-        <List>
-          <ListItem button>
+        <List className={classes.grid}>
+          <ListItem button className={classes.listItemstyle}>
             <ListItemText primary="Student unique ID" secondary={data._id} />
           </ListItem>
           <Divider />
-          <ListItem button>
-            <ListItemText primary="Full name" secondary={data.fullname} />
+          <ListItem button className={classes.listItemstyle}>
+            <ListItemText
+              primary="Full name"
+              secondary={`${data.firstname} ${data.lastname} ${data.surname}`}
+            />
           </ListItem>
           <Divider />
-          <ListItem button>
+          <ListItem className={classes.listItemstyle} button>
             <ListItemText primary="Class" secondary={data.class} />
           </ListItem>
 
           <Divider />
 
-          <ListItem button>
+          <ListItem className={classes.listItemstyle} button>
             <ListItemText primary="Roll number" secondary={data.rollNumber} />
           </ListItem>
           <Divider />
-          <ListItem button>
+          <ListItem className={classes.listItemstyle} button>
             <ListItemText primary="Address" secondary={data.address} />
           </ListItem>
 
           <Divider />
+
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText
+              primary="Date of admission:"
+              secondary={data.admissionDate}
+            />
+          </ListItem>
+
+          <Divider />
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText primary="Age of student" secondary={data.age} />
+          </ListItem>
+          <Divider />
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText primary="Email address" secondary={data.email} />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText primary="City" secondary={data.city} />
+          </ListItem>
+          <Divider />
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText primary="Address" secondary={data.address} />
+          </ListItem>
+          <Divider />
+          <ListItem className={classes.listItemstyle} button>
+            <ListItemText
+              primary="All teachers assigned"
+              secondary={data.teacherAssigned}
+            />
+          </ListItem>
+
+          <Divider />
         </List>
-
-        <ListItem button>
-          <ListItemText
-            primary="Date of admission:"
-            secondary={data.admissionDate}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText primary="Age of student" secondary={data.age} />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText primary="Email address" secondary={data.email} />
-        </ListItem>
-
-        <Divider />
-
-        <ListItem button>
-          <ListItemText primary="City" secondary={data.city} />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText primary="Address" secondary={data.address} />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <ListItemText
-            primary="All teachers assigned"
-            secondary={data.teacherAssigned}
-          />
-        </ListItem>
-
-        <Divider />
       </Dialog>
     </div>
   );

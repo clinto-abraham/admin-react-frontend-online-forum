@@ -15,8 +15,9 @@ import { useDispatch } from "react-redux";
 import { getAdmin } from "./redux/actions/adminAction";
 import { getTeachers } from "./redux/actions/teacherActions";
 import View from "./Pages/Page-Children/Students-Children/view";
-import Edit from "./Pages/edit";
+
 import StudentForm from "./Pages/studentForm";
+import EditStudent from "./Pages/edit";
 
 function App() {
   const [adminData, setAdminData] = useState(null);
@@ -52,7 +53,7 @@ function App() {
             <View />
           </Route>
           <Route path="/edit-student-info/:id" exact>
-            <Edit />
+            <EditStudent />
           </Route>
           <Route path="/register-teacher" exact>
             <TeacherRegister />
