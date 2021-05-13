@@ -1,17 +1,17 @@
 import {
   FETCH_TEACHERS,
-  CREATE,
-  UPDATE,
   DELETE_TEACHER,
+  CREATE_TEACHER,
+  UPDATE_TEACHER,
 } from "../constants/actionTypes";
 
 function teachers(teachers = [], action) {
   switch (action.type) {
     case FETCH_TEACHERS:
       return action.payload;
-    case CREATE:
+    case CREATE_TEACHER:
       return [...teachers, action.payload];
-    case UPDATE:
+    case UPDATE_TEACHER:
       return teachers.map((teacherData) =>
         teacherData._id === action.payload._id ? action.payload : teacherData
       );

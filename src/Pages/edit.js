@@ -456,6 +456,7 @@ function Edit4({ data, prevStep, nextStep }) {
 
   const handleClose = () => {
     setOpen(false);
+    setStudentupdateData(0);
   };
 
   const handleSubmit = async (e) => {

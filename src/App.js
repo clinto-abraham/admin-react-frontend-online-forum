@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./Styles/App.css";
 
-import BasicForms from "./Pages/form";
 import TeacherRegister from "./Pages/teacherRegister";
 import TeacherAssigning from "./Pages/teacherAssign";
 import AdminSignIn from "./Pages/AdminSignIn";
@@ -14,21 +13,15 @@ import NavbarAdmin from "./Navbars/NavbarAdmin";
 import BottomNavbar from "./Navbars/bottomNavbar";
 import { useDispatch } from "react-redux";
 import { getAdmin } from "./redux/actions/adminAction";
-import { getStudents } from "./redux/actions/studentAction";
 import { getTeachers } from "./redux/actions/teacherActions";
 import View from "./Pages/Page-Children/Students-Children/view";
 import Edit from "./Pages/edit";
 import StudentForm from "./Pages/studentForm";
 
 function App() {
-  const [studentformData, setStudentformData] = useState(null);
   const [adminData, setAdminData] = useState(null);
   const [teacherformData, setTeacherformData] = useState(null);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getStudents());
-  }, [studentformData, dispatch]);
 
   useEffect(() => {
     dispatch(getAdmin());
@@ -43,41 +36,23 @@ function App() {
       <Router>
         <NavbarAdmin />
         <Switch>
+          <Route path="/" exact>
+            <AdminSignIn />
+          </Route>
           <Route path="/dashboard" exact>
-            <DashBoardAdmin
-              studentformData={studentformData}
-              teacherformData={teacherformData}
-            />
+            <DashBoardAdmin />
           </Route>
           <Route path="/register-student" exact>
-            <BasicForms
-              studentformData={studentformData}
-              setStudentformData={setStudentformData}
-            />
-          </Route>
-          <Route path="/student-form" exact>
-            <StudentForm
-              studentformData={studentformData}
-              setStudentformData={setStudentformData}
-            />
+            <StudentForm />
           </Route>
           <Route path="/students-info" exact>
-            <StudentInfo
-              studentformData={studentformData}
-              setStudentformData={setStudentformData}
-            />
+            <StudentInfo />
           </Route>
           <Route path="/student-info/:id" exact>
-            <View
-              studentformData={studentformData}
-              setStudentformData={setStudentformData}
-            />
+            <View />
           </Route>
           <Route path="/edit-student-info/:id" exact>
-            <Edit
-              studentformData={studentformData}
-              setStudentformData={setStudentformData}
-            />
+            <Edit />
           </Route>
           <Route path="/register-teacher" exact>
             <TeacherRegister />
@@ -99,9 +74,6 @@ function App() {
               adminData={adminData}
               setAdminData={setAdminData}
             />
-          </Route>
-          <Route path="/" exact>
-            <AdminSignIn />
           </Route>
         </Switch>
         <BottomNavbar />

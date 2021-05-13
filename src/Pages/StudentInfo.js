@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-function StudentInfo({ studentformData, setStudentformData }) {
+function StudentInfo() {
   const students = useSelector((state) => state.students);
   console.log(students);
   const dispatch = useDispatch();
@@ -73,26 +73,29 @@ function StudentInfo({ studentformData, setStudentformData }) {
                 </TableHead>
                 {students.map((data) => (
                   <TableBody>
-                    <StyledTableRow key={data.age}>
+                    <StyledTableRow key={data._id}>
                       <StyledTableCell align="left" key={data.rollNumber}>
                         <View data={data} />
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
                         scope="row"
-                        key={data.fullname}
+                        key={data.firstname}
                       >
-                        {data.fullname}
+                        {data.firstname}
                       </StyledTableCell>
                       <StyledTableCell align="right" key={data.email}>
                         {data.email}
                       </StyledTableCell>
+
                       <StyledTableCell align="right" key={data.class}>
                         {data.class}
                       </StyledTableCell>
                       {data.contact}
                       <StyledTableCell align="right" key={data._id}>
-                        <EditDialog1 data={data} />
+                        <Link to="/students-info/:id">
+                          <EditDialog1 data={data} />
+                        </Link>
                       </StyledTableCell>
                       <StyledTableCell align="right" key={data._id}>
                         <Button

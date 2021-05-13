@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import useStyles from "../Styles/makeStyles";
 import { CCardBody } from "@coreui/react";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 // import Checkbox from "@material-ui/core/Checkbox";
@@ -19,7 +21,18 @@ import { CCardBody } from "@coreui/react";
 
 import { useDispatch } from "react-redux";
 import { signin } from "../redux/actions/auth";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: "100%",
+//     "& > * + *": {
+//       marginTop: theme.spacing(2),
+//     },
+//   },
+// }));
 const initialState = { username: "", password: "" };
 
 export default function AdminSignIn() {
@@ -40,9 +53,20 @@ export default function AdminSignIn() {
   function clear() {
     setForm(initialState);
   }
-
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <>
       <CCardBody>
@@ -94,9 +118,23 @@ export default function AdminSignIn() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={handleClick}
               >
                 Sign In
               </Button>
+              {/* <div className={classes.root}> */}
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert onClose={handleClose} severity="success">
+                  You have successfully logged in!
+                </Alert>
+                {/* <Alert severity="error">This is an error message!</Alert>
+      <Alert severity="warning">This is a warning message!</Alert> */}
+              </Snackbar>
+
               {/* <Grid container>
             <Grid item xs>
                 Forgot password?
@@ -110,3 +148,4 @@ export default function AdminSignIn() {
     </>
   );
 }
+//

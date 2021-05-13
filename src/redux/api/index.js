@@ -14,8 +14,8 @@ API.interceptors.request.use((req) => {
 
 // working api below
 // student
-export const createStudent = (studentform) =>
-  API.post("/create-student", studentform);
+export const createStudent = (studentformData) =>
+  API.post("/create-student", studentformData);
 export const fetchStudents = () => API.get("/students-info");
 export const updateStudent = (id, updatedPost) =>
   API.patch(`/update-student/${id}`, updatedPost);

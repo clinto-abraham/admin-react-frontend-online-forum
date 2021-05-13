@@ -1,4 +1,4 @@
-import { FETCH_ADMIN, UPDATE } from "../constants/actionTypes";
+import { FETCH_ADMIN, UPDATE_ADMIN } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
 export const getAdmin = () => async (dispatch) => {
@@ -13,7 +13,7 @@ export const getAdmin = () => async (dispatch) => {
 export const updateAdmin = (id, post) => async (dispatch) => {
   try {
     const { data } = await api.updateAdmin(id, post);
-    dispatch({ type: UPDATE, payload: data });
+    dispatch({ type: UPDATE_ADMIN, payload: data });
   } catch (error) {
     console.log(error);
   }

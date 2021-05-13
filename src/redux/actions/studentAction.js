@@ -1,15 +1,15 @@
 import {
   FETCH_STUDENTS,
-  CREATE,
-  UPDATE,
+  CREATE_STUDENT,
+  UPDATE_STUDENT,
   DELETE_STUDENT,
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
-export const createStudent = (studentform) => async (dispatch) => {
+export const createStudent = (studentformData) => async (dispatch) => {
   try {
-    const { data } = await api.createStudent(studentform);
-    dispatch({ type: CREATE, payload: data });
+    const { data } = await api.createStudent(studentformData);
+    dispatch({ type: CREATE_STUDENT, payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -37,7 +37,7 @@ export const deleteStudent = (id) => async (dispatch) => {
 export const updateStudent = (id, post) => async (dispatch) => {
   try {
     const { data } = await api.updateStudent(id, post);
-    dispatch({ type: UPDATE, payload: data });
+    dispatch({ type: UPDATE_STUDENT, payload: data });
   } catch (error) {
     console.log(error);
   }

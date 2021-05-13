@@ -7,13 +7,10 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import EditIcon from "@material-ui/icons/Edit";
 import TextField from "@material-ui/core/TextField";
-import { useDispatch } from "react-redux";
 
 // import { updateStudent } from "../../../../redux/actions/studentAction";
 
 export default function Edit1({ data, prevStep, nextStep }) {
-  const dispatch = useDispatch();
-
   const [studentupdateData, setStudentupdateData] = useState({
     fullname: "",
     email: "",

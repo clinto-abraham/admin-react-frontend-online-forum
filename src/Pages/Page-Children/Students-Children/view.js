@@ -13,7 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import { Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
