@@ -1,13 +1,10 @@
-import moment from 'moment';
-import { v4 as uuid } from 'uuid';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-
 import {
   Box,
   Button,
   Card,
   CardHeader,
   Chip,
+  CircularProgress,
   Divider,
   Table,
   TableBody,
@@ -15,217 +12,94 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
-  Tooltip
-} from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+  Tooltip,
+} from "@material-ui/core";
+import { Link } from 'react-router-dom'
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import moment from "moment";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { useSelector } from "react-redux";
+// import { getStudents } from '../../../redux/actions/studentAction'
 
+const DataStudents = (props) => {
+  const { students, isLoading } = useSelector((state) => state.students);
+  // const dispatch = useDispatch();
+  // dispatch(getStudents());
 
-const orders = [
-  {
-    id: uuid(),
-    ref: 'CDD1049',
-    amount: 30.5,
-    customer: {
-      name: 'Ekaterina Tankova'
-    },
-    createdAt: 1555016400000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1048',
-    amount: 25.1,
-    customer: {
-      name: 'Cao Yu'
-    },
-    createdAt: 1555016400000,
-    status: 'Inactive'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1047',
-    amount: 10.99,
-    customer: {
-      name: 'Alexa Richardson'
-    },
-    createdAt: 1554930000000,
-    status: 'Completed'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1046',
-    amount: 96.43,
-    customer: {
-      name: 'Anje Keizer'
-    },
-    createdAt: 1554757200000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1045',
-    amount: 32.54,
-    customer: {
-      name: 'Clarke Gillebert'
-    },
-    createdAt: 1554670800000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1044',
-    amount: 16.76,
-    customer: {
-      name: 'Adam Denisov'
-    },
-    createdAt: 1554670800000,
-    status: 'Completed'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1049',
-    amount: 30.5,
-    customer: {
-      name: 'Ekaterina Tankova'
-    },
-    createdAt: 1555016400000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1048',
-    amount: 25.1,
-    customer: {
-      name: 'Cao Yu'
-    },
-    createdAt: 1555016400000,
-    status: 'Inactive'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1047',
-    amount: 10.99,
-    customer: {
-      name: 'Alexa Richardson'
-    },
-    createdAt: 1554930000000,
-    status: 'Completed'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1046',
-    amount: 96.43,
-    customer: {
-      name: 'Anje Keizer'
-    },
-    createdAt: 1554757200000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1045',
-    amount: 32.54,
-    customer: {
-      name: 'Clarke Gillebert'
-    },
-    createdAt: 1554670800000,
-    status: 'In Progress'
-  },
-  {
-    id: uuid(),
-    ref: 'CDD1044',
-    amount: 16.76,
-    customer: {
-      name: 'Adam Denisov'
-    },
-    createdAt: 1554670800000,
-    status: 'Completed'
-  }
-];
-
-const DataStudents = (props) => (
-  <div className="padding-grid">
-  
-  <Card {...props}>
-    <CardHeader title="Latest Orders" />
-    <Divider />
-    <PerfectScrollbar>
-      <Box sx={{ minWidth: 800 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                Roll Number
-              </TableCell>
-              <TableCell>
-                Name of student
-              </TableCell>
-              <TableCell sortDirection="desc">
-                <Tooltip
-                  enterDelay={300}
-                  title="Sort"
-                >
-                  <TableSortLabel
-                    active
-                    direction="desc"
-                  >
-                    Date of Admission
-                  </TableSortLabel>
-                </Tooltip>
-              </TableCell>
-              <TableCell>
-                Status
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders.map((order) => (
-              <TableRow
-                hover
-                key={order.id}
-              >
-                <TableCell>
-                  {order.ref}
-                </TableCell>
-                <TableCell>
-                  {order.customer.name}
-                </TableCell>
-                <TableCell>
-                  {moment(order.createdAt).format('DD/MM/YYYY')}
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    color="primary"
-                    label={order.status}
-                    size="small"
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Box>
-    </PerfectScrollbar>
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        p: 2
-      }}
-    >
-      <Button
-        color="primary"
-        endIcon={<ArrowRightIcon />}
-        size="small"
-        variant="text"
-      >
-        View all
-      </Button>
-
-    </Box>
-  </Card>
-  
-  </div>
-);
+  return (
+    <div className="padding-grid">
+      <Card {...props}>
+        <CardHeader title="Latest updates on students" />
+        <Divider />
+        <PerfectScrollbar>
+          <Box sx={{ minWidth: 800 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Roll Number</TableCell>
+                  <TableCell>Name of student</TableCell>
+                  <TableCell sortDirection="desc">
+                    <Tooltip enterDelay={300} title="Sort">
+                      <TableSortLabel active direction="desc">
+                        Date of Admission
+                      </TableSortLabel>
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell>Status</TableCell>
+                </TableRow>
+              </TableHead>
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                <TableBody>
+                  {students.map((stu) => (
+                    <TableRow hover key={stu.id}>
+                      <TableCell>{stu.rollNumber}</TableCell>
+                      <TableCell>{stu.firstName}  {" "} {stu.lastName} + {" "} {stu.surname}</TableCell>
+                      <TableCell>
+                        {moment(stu.createdAt).format("DD/MM/YYYY")}
+                      </TableCell>
+                      <TableCell>
+                        <Chip color="primary" label={stu.status} size="small" />
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              )}
+            </Table>
+          </Box>
+        </PerfectScrollbar>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            p: 2,
+          }}>
+            <Link to="/students-info">
+          <Button
+            color="primary"
+            endIcon={<ArrowRightIcon />}
+            size="small"
+            variant="text">
+            View all
+          </Button>
+          </Link>
+        </Box>
+      </Card>
+    </div>
+  );
+};
 
 export default DataStudents;
+
+// const s = [
+//   {
+//     id: uuid(),
+//     ref: 'CDD1049',
+//     amount: 30.5,
+//     customer: {
+//       name: 'Ekaterina Tankova'
+//     },
+//     createdAt: 1555016400000,
+//     status: 'In Progress'
+//   }

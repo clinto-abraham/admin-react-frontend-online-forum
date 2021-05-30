@@ -9,7 +9,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import { TextField } from "@material-ui/core";
+import { CircularProgress, TextField } from "@material-ui/core";
+import {useSelector } from "react-redux";
+// import { getTeachers } from "../redux/actions/teacherActions";
+// import { getStudents } from "../redux/actions/studentAction";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -29,17 +32,17 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(studentName, id, stdClass) {
-  return { studentName, id, stdClass };
-}
+// function createData(studentName, id, stdClass) {
+//   return { studentName, id, stdClass };
+// }
 
-const rows = [
-  createData("Shalini", 159, "I"),
-  createData("Frank Underwood", 237, "III"),
-  createData("Meenu Jacob", 262, "IV"),
-  createData("Shyama", 305, "VII"),
-  createData("Marykutty", 356, "X"),
-];
+// const students = [
+//   createData("Shalini", 159, "I"),
+//   createData("Frank Underwood", 237, "III"),
+//   createData("Meenu Jacob", 262, "IV"),
+//   createData("Shyama", 305, "VII"),
+//   createData("Marykutty", 356, "X"),
+// ];
 
 const useStyles = makeStyles({
   table: {
@@ -47,48 +50,54 @@ const useStyles = makeStyles({
   },
 });
 
-const states = [
-  { value: "teacher", label: "Teacher" },
-  { value: "Morgan", label: "Morgan" },
-  { value: "Jolly", label: "Jolly" },
-  { value: "Ajimon", label: "Ajimon" },
-  { value: "Marykutty", label: "Marykutty" },
-  { value: "Varkey", label: "Varkey" },
-  { value: "Shyam", label: "Shyam" },
-  { value: "mizoram", label: "Mizoram" },
-  { value: "nagaland", label: "Nagaland" },
-  { value: "sikkim", label: "Sikkim" },
-  { value: "tamil_nadu", label: "Tamil Nadu" },
-  { value: "tripura", label: "Tripura" },
-  { value: "uttaranchal", label: "Uttaranchal" },
-  { value: "uttar_pradesh", label: "Uttar Pradesh" },
-  { value: "haryana", label: "Haryana" },
-  { value: "himachal_pradesh", label: "Himachal Pradesh" },
-  { value: "andhra_pradesh", label: "Andhra Pradesh" },
-  { value: "jammu_and_kashmir", label: "Jammu and Kashmir" },
-  { value: "jharkhand", label: "Jharkhand" },
+// const teachers = [
+//   { value: "teacher", label: "Teacher" },
+//   { value: "Morgan", label: "Morgan" },
+//   { value: "Jolly", label: "Jolly" },
+//   { value: "Ajimon", label: "Ajimon" },
+//   { value: "Marykutty", label: "Marykutty" },
+//   { value: "Varkey", label: "Varkey" },
+//   { value: "Shyam", label: "Shyam" },
+//   { value: "mizoram", label: "Mizoram" },
+//   { value: "nagaland", label: "Nagaland" },
+//   { value: "sikkim", label: "Sikkim" },
+//   { value: "tamil_nadu", label: "Tamil Nadu" },
+//   { value: "tripura", label: "Tripura" },
+//   { value: "uttaranchal", label: "Uttaranchal" },
+//   { value: "uttar_pradesh", label: "Uttar Pradesh" },
+//   { value: "haryana", label: "Haryana" },
+//   { value: "himachal_pradesh", label: "Himachal Pradesh" },
+//   { value: "andhra_pradesh", label: "Andhra Pradesh" },
+//   { value: "jammu_and_kashmir", label: "Jammu and Kashmir" },
+//   { value: "jharkhand", label: "Jharkhand" },
 
-  { value: "bihar", label: "Bihar" },
+//   { value: "bihar", label: "Bihar" },
 
-  { value: "gujarat", label: "Gujarat" },
+//   { value: "gujarat", label: "Gujarat" },
 
-  { value: "west_bengal", label: "West Bengal" },
-  { value: "karnataka", label: "Karnataka" },
+//   { value: "west_bengal", label: "West Bengal" },
+//   { value: "karnataka", label: "Karnataka" },
 
-  { value: "madhya_pradesh", label: " Madhya Pradesh" },
-  { value: "maharashtra", label: "Maharashtra" },
+//   { value: "madhya_pradesh", label: " Madhya Pradesh" },
+//   { value: "maharashtra", label: "Maharashtra" },
 
-  { value: "punjab", label: "Punjab" },
-  { value: "rajasthan", label: "Rajasthan" },
+//   { value: "punjab", label: "Punjab" },
+//   { value: "rajasthan", label: "Rajasthan" },
 
-  { value: "arunachal_pradesh", label: "Arunachal Pradesh" },
-  { value: "assam", label: "Assam" },
-];
+//   { value: "arunachal_pradesh", label: "Arunachal Pradesh" },
+//   { value: "assam", label: "Assam" },
+// ];
 
 function TeacherAssigning() {
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
   const classes = useStyles();
+  // const dispatch = useDispatch();
+  // dispatch(getTeachers())
+  // dispatch(getStudents())
+
+  const { teachers, isLoading } = useSelector((state) => state.teachers)
+  const { students } = useSelector((state) => state.teachers)
   const [values, setValues] = useState({
     reading: "Teacher",
     writing: "Teacher",
@@ -102,7 +111,8 @@ function TeacherAssigning() {
       [event.target.name]: event.target.value,
     });
   };
-
+  if (!teachers.length && !isLoading)
+  return "No students found! Kindle register new student or reload to best results!";
   return (
     <>
       {!user?.result?._id ? (
@@ -130,7 +140,7 @@ function TeacherAssigning() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {students.map((row) => (
                   <StyledTableRow key={row.studentName}>
                     <StyledTableCell align="left">{row.id}</StyledTableCell>
                     <StyledTableCell component="th" scope="row">
@@ -148,7 +158,7 @@ function TeacherAssigning() {
                         value={values.state}
                         variant="outlined"
                       >
-                        {states.map((option) => (
+                        {teachers.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
@@ -167,7 +177,7 @@ function TeacherAssigning() {
                         value={values.state}
                         variant="outlined"
                       >
-                        {states.map((option) => (
+                        {teachers.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
@@ -186,7 +196,7 @@ function TeacherAssigning() {
                         value={values.state}
                         variant="outlined"
                       >
-                        {states.map((option) => (
+                        {teachers.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
@@ -206,17 +216,19 @@ function TeacherAssigning() {
                         value={values.state}
                         variant="outlined"
                       >
-                        {states.map((option) => (
+                        {teachers.map((option) => (
                           <option key={option.value} value={option.value}>
                             {option.label}
                           </option>
                         ))}
                       </TextField>
                     </StyledTableCell>
-
+                    isLoading ? (
+        <CircularProgress /> 
+      ) : (
                     <StyledTableCell align="right">
                       {row.stdClass}
-                    </StyledTableCell>
+                    </StyledTableCell> )
                   </StyledTableRow>
                 ))}
               </TableBody>

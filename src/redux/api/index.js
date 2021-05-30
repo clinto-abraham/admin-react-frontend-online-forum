@@ -14,8 +14,8 @@ API.interceptors.request.use((req) => {
 
 // working api below
 // student
-export const createStudent = (studentformData) =>
-  API.post("/create-student", studentformData);
+export const createStudent = (studentFormData) =>
+  API.post("/create-student", studentFormData);
 export const fetchStudents = () => API.get("/students-info");
 export const updateStudent = (id, updatedPost) =>
   API.patch(`/update-student/${id}`, updatedPost);
@@ -28,9 +28,9 @@ export const fetchTeachers = () => API.get("/teachers-info");
 export const updateTeacher = (id, updatedPost) =>
   API.patch(`/update-teacher/${id}`, updatedPost);
 export const deleteTeacher = (id) => API.delete(`/delete-teacher/${id}`);
-
+export const createTeacherAPI = (teacherFormData) => API.post("/create-teacher", teacherFormData)
 // admin
 export const signIn = (formData) => API.post("/admin-signin", formData);
 export const fetchAdmin = () => API.get("/admin-info");
-export const updateAdmin = (id, updatedPost) =>
-  API.patch(`/update-admin/${id}`, updatedPost);
+export const updateAdmin = (id, updateAccount) =>
+  API.patch(`/update-admin/${id}`, updateAccount);

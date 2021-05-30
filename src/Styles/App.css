@@ -11,6 +11,16 @@ body {
   margin: 15px;
   display: inline-flexbox;
 }
+/* Global app css */
+.block{
+  display:block;
+}
+.margin-left{
+  margin-left: 20px;
+}
+.center{
+  align-self: center;
+}
 /* form control css */
 label {
   display: inline-block;

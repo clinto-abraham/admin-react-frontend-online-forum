@@ -2,20 +2,16 @@ import { BarChart as BarChartIcon } from "react-feather";
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import decode from "jwt-decode";
 import * as actionType from "../redux/constants/actionTypes";
-
-//
 import Badge from "@material-ui/core/Badge";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import { deepOrange } from "@material-ui/core/colors";
 
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -76,18 +72,14 @@ function NavbarAdmin() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  //  these above for avatar dropdown
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("account")));
   const dispatch = useDispatch();
-  // const location = useLocation();
-  console.log(user);
   const history = useHistory();
 
   function logout() {
     dispatch({ type: actionType.LOGOUT });
-
     history.push("/");
-
     setUser(null);
   }
 
@@ -192,7 +184,7 @@ function NavbarAdmin() {
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-2 padding-grid"></div>
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-2 padding-grid"></div>
               <div className="col-xs-12 col-sm-12 col-md-12 col-lg-1 padding-grid">
-                <div className={classes.root}>
+                <div className={`${classes.root}col-xs-12 col-sm-12 col-md-12 col-lg-2`} >
                   <Button
                     aria-controls="simple-menu"
                     aria-haspopup="true"
@@ -206,11 +198,14 @@ function NavbarAdmin() {
                       }}
                       variant="dot"
                     >
-                      <Avatar variant="square" className={classes.square}>
+                      <Avatar variant="square" className={`${classes.square}`}>
                         N
                       </Avatar>
                     </StyledBadge>
+                    <ArrowDropDownIcon className="link block" />
                   </Button>
+                  
+                 
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}

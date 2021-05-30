@@ -6,9 +6,9 @@ import {
 } from "../constants/actionTypes";
 import * as api from "../api/index.js";
 
-export const createStudent = (studentformData) => async (dispatch) => {
+export const createStudent = (studentFormData) => async (dispatch) => {
   try {
-    const { data } = await api.createStudent(studentformData);
+    const { data } = await api.createStudent(studentFormData);
     dispatch({ type: CREATE_STUDENT, payload: data });
   } catch (error) {
     console.log(error);

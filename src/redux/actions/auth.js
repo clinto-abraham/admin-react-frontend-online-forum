@@ -11,12 +11,12 @@ export const signin = (formData, router) => async (dispatch) => {
   }
 };
 
-export const signup = (registerForm) => async (dispatch) => {
-  try {
-    const { data } = await api.signUp(registerForm);
-    dispatch({ type: AUTH, data });
-    // router.push("/register-teacher");
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const signup = (registerForm) => async (dispatch) => {
+//   try {
+//     const { data } = await api.signUp(registerForm);
+//     dispatch({ type: AUTH, data });
+//     // router.push("/register-teacher");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

@@ -86,7 +86,7 @@ export default function View({ data }) {
           <ListItem button className={classes.listItemstyle}>
             <ListItemText
               primary="Full name"
-              secondary={`${data.firstname} ${data.lastname} ${data.surname}`}
+              secondary={`${data.firstName} ${data.lastName} ${data.surname}`}
             />
           </ListItem>
           <Divider />

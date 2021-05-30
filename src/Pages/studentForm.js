@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { createStudent } from "../redux/actions/studentAction";
-import clsx from "clsx";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -95,14 +94,14 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 export default function StudentForm() {
-  const [studentformData, setStudentformData] = useState({
-    firstname: "",
-    lastname: "",
+  const [studentFormData, setStudentFormData] = useState({
+    firstName: "",
+    lastName: "",
     surname: "",
-    fathername: "",
-    mothername: "",
+    fatherName: "",
+    motherName: "",
     nativeLanguage: "",
-    dateOfbirth: "",
+    dateOfBirth: "",
     email: "",
     phoneNumber: "",
     alternatePhone: "",
@@ -120,28 +119,74 @@ export default function StudentForm() {
     paymentDue: "",
     paymentReceipt: "",
     textarea: "",
-    listening: false,
-    reading: false,
-    writing: false,
-    speaking: false,
+    assigned: {
+      listening: {
+        opted: false,
+        dateOfAssign: "",
+        moduleEndDate: "",
+        moduleCost: "",
+        teacherName: "",
+        tutorialCost: "",
+        lessonComplete: "",
+        tutorialHrsComplete: "",
+        teacherID: "",
+      },
+        reading: {
+          opted: false,
+          dateOfAssign: "",
+          moduleEndDate: "",
+          moduleCost: "",
+          teacherName: "",
+          tutorialCost: "",
+          lessonComplete: "",
+          tutorialHrsComplete: "",
+          teacherID: "",
+        },
+        
+          writing: {
+            opted: false,
+            dateOfAssign: "",
+            moduleEndDate: "",
+            moduleCost: "",
+            teacherName: "",
+            tutorialCost: "",
+            lessonComplete: "",
+            tutorialHrsComplete: "",
+            teacherID: "",
+          },
+          
+            speaking: {
+              opted: false,
+              dateOfAssign: "",
+              moduleEndDate: "",
+              moduleCost: "",
+              teacherName: "",
+              tutorialCost: "",
+              lessonComplete: "",
+              tutorialHrsComplete: "",
+              teacherID: "",
+            },
+    
+    },
+    
     admissionDate: "",
     courseCompletion: false,
     IMPS: false,
     GooglePay: false,
     NEFT: false,
     PhonePe: false,
-    CASH: "",
-    teacherAssigned: [],
+    CASH: false,
+  
   });
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setStudentformData({ ...studentformData, [e.target.name]: e.target.value });
+    setStudentFormData({ ...studentFormData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createStudent(studentformData));
+    dispatch(createStudent(studentFormData));
   };
 
   const [state, setState] = useState(0);
@@ -166,7 +211,7 @@ export default function StudentForm() {
       return (
         <StudentForm1
           nextStep={nextStep}
-          studentformData={studentformData}
+          studentFormData={studentFormData}
           handleChange={handleChange}
         />
       );
@@ -175,7 +220,7 @@ export default function StudentForm() {
         <StudentForm2
           prevStep={prevStep}
           nextStep={nextStep}
-          studentformData={studentformData}
+          studentFormData={studentFormData}
           handleChange={handleChange}
         />
       );
@@ -184,8 +229,8 @@ export default function StudentForm() {
         <StudentForm3
           prevStep={prevStep}
           nextStep={nextStep}
-          studentformData={studentformData}
-          setStudentformData={setStudentformData}
+          studentFormData={studentFormData}
+          setStudentFormData={setStudentFormData}
           handleChange={handleChange}
         />
       );
@@ -193,7 +238,7 @@ export default function StudentForm() {
       return (
         <StudentForm4
           prevStep={prevStep}
-          studentformData={studentformData}
+          studentFormData={studentFormData}
           handleSubmit={handleSubmit}
           firstStep={firstStep}
         />
@@ -209,7 +254,7 @@ export default function StudentForm() {
 //   setValues({ ...values, showPassword: !values.showPassword });
 // };
 
-function StudentForm1({ nextStep, studentformData, handleChange }) {
+function StudentForm1({ nextStep, studentFormData, handleChange }) {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
@@ -230,70 +275,70 @@ function StudentForm1({ nextStep, studentformData, handleChange }) {
                   <div xs="12" sm="6" md="4" lg="4">
                     <TextField
                       label="First Name"
-                      name="firstname"
-                      value={studentformData.firstname}
+                      name="firstName"
+                      value={studentFormData.firstName}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                     <TextField
                       label="Last Name"
-                      name="lastname"
-                      value={studentformData.lastname}
+                      name="lastName"
+                      value={studentFormData.lastName}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                     <TextField
                       label="Surname"
                       name="surname"
-                      value={studentformData.surname}
+                      value={studentFormData.surname}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                   </div>
                   <div xs="12" sm="6" md="4" lg="4">
                     <TextField
                       label="Assign unique roll number"
                       name="rollNumber"
-                      value={studentformData.rollNumber}
+                      value={studentFormData.rollNumber}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                     <TextField
                       label="Class"
                       name="class"
-                      value={studentformData.class}
+                      value={studentFormData.class}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                     <TextField
                       label="Age"
                       name="age"
-                      value={studentformData.age}
+                      value={studentFormData.age}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />{" "}
                   </div>
                   <div xs="12" sm="6" md="4" lg="4">
                     <TextField
                       label="Native spoken language"
                       name="nativeLanguage"
-                      value={studentformData.nativeLanguage}
+                      value={studentFormData.nativeLanguage}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                     <TextField
                       label="Father's name"
-                      name="fathername"
-                      value={studentformData.fathername}
+                      name="fatherName"
+                      value={studentFormData.fatherName}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                     <TextField
                       label="Mother's name"
-                      name="mothername"
-                      value={studentformData.mothername}
+                      name="motherName"
+                      value={studentFormData.motherName}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={`$(classes.margin) $(classes.textField)`}
                     />
                   </div>
                   <div xs="12" md="12" lg="12" sm="12">
@@ -303,31 +348,31 @@ function StudentForm1({ nextStep, studentformData, handleChange }) {
                       name="textarea"
                       multiline
                       rowsMax={4}
-                      value={studentformData.textarea}
+                      value={studentFormData.textarea}
                       onChange={handleChange}
                       fullWidth
-                      className={clsx(classes.margin, classes.textarea)}
+                      className={`$(classes.margin) $(classes.textarea)`}
                     />
                   </div>
                   <TextField
                     label="Date of birth"
-                    name="dateOfbirth"
-                    value={studentformData.dateOfbirth}
+                    name="dateOfBirth"
+                    value={studentFormData.dateOfBirth}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={`$(classes.margin) $(classes.textField)`}
                   />
                   <TextField
                     label="Date of admission"
                     name="admissionDate"
-                    value={studentformData.admissionDate}
+                    value={studentFormData.admissionDate}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={`$(classes.margin) $(classes.textField)`}
                   />
                   <TextField
                     disabled
                     id="standard-disabled"
                     label="User name"
-                    className={clsx(classes.margin, classes.textField)}
+                    className={`$(classes.margin) $(classes.textField)`}
                   />
                 </Paper>
               </div>
@@ -348,7 +393,7 @@ function StudentForm1({ nextStep, studentformData, handleChange }) {
   );
 }
 
-function StudentForm2({ prevStep, nextStep, handleChange, studentformData }) {
+function StudentForm2({ prevStep, nextStep, handleChange, studentFormData }) {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
@@ -369,69 +414,69 @@ function StudentForm2({ prevStep, nextStep, handleChange, studentformData }) {
                   <TextField
                     label="Enter email id"
                     name="email"
-                    value={studentformData.email}
+                    value={studentFormData.email}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                   />
                   <TextField
                     label="Contact number"
                     name="phoneNumber"
-                    value={studentformData.phoneNumber}
+                    value={studentFormData.phoneNumber}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                   />
                   <TextField
                     label="Alternate contact number"
                     name="alternatePhone"
-                    value={studentformData.alternatePhone}
+                    value={studentFormData.alternatePhone}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                   />
 
                   <Grid>
                     <TextField
                       label="Address"
                       name="address"
-                      value={studentformData.address}
+                      value={studentFormData.address}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                     <TextField
                       label="City"
                       name="city"
-                      value={studentformData.city}
+                      value={studentFormData.city}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                     <TextField
                       label="Postal Code"
                       name="pinCode"
-                      value={studentformData.pinCode}
+                      value={studentFormData.pinCode}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                   </Grid>
 
                   <TextField
                     label="State"
                     name="state"
-                    value={studentformData.state}
+                    value={studentFormData.state}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                   />
                   <TextField
                     label="Country"
                     name="country"
-                    value={studentformData.country}
+                    value={studentFormData.country}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                   />
                   <TextField
                     label="Skype ID / Any online ID for communication"
                     name="onlineID"
-                    value={studentformData.onlineID}
+                    value={studentFormData.onlineID}
                     onChange={handleChange}
-                    className={clsx(classes.margin, classes.textField)}
+                    className={(classes.margin, classes.textField)}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">@</InputAdornment>
@@ -468,15 +513,15 @@ function StudentForm2({ prevStep, nextStep, handleChange, studentformData }) {
 function StudentForm3({
   prevStep,
   nextStep,
-  studentformData,
-  setStudentformData,
+  studentFormData,
+  setStudentFormData,
   handleChange,
 }) {
   const classes = useStyles();
 
   const handleBoolean = (event) => {
-    setStudentformData({
-      ...studentformData,
+    setStudentFormData({
+      ...studentFormData,
       [event.target.name]: event.target.checked,
     });
   };
@@ -504,7 +549,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.reading}
+                              checked={studentFormData.reading}
                               onChange={handleBoolean}
                               name="reading"
                             />
@@ -514,7 +559,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.listening}
+                              checked={studentFormData.listening}
                               onChange={handleBoolean}
                               name="listening"
                             />
@@ -524,7 +569,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.speaking}
+                              checked={studentFormData.speaking}
                               onChange={handleBoolean}
                               name="speaking"
                             />
@@ -534,7 +579,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.writing}
+                              checked={studentFormData.writing}
                               onChange={handleBoolean}
                               name="writing"
                             />
@@ -551,9 +596,9 @@ function StudentForm3({
                     <TextField
                       label="Total payment"
                       name="totalPayment"
-                      value={studentformData.totalPayment}
+                      value={studentFormData.totalPayment}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">Rs</InputAdornment>
@@ -563,9 +608,9 @@ function StudentForm3({
                     <TextField
                       label="Due amount"
                       name="paymentDue"
-                      value={studentformData.paymentDue}
+                      value={studentFormData.paymentDue}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">Rs</InputAdornment>
@@ -575,9 +620,9 @@ function StudentForm3({
                     <TextField
                       label="Payment received"
                       name="paymentReceived"
-                      value={studentformData.paymentReceived}
+                      value={studentFormData.paymentReceived}
                       onChange={handleChange}
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">Rs</InputAdornment>
@@ -591,12 +636,12 @@ function StudentForm3({
                         Choose payment mode
                       </FormLabel>
                       <FormGroup
-                        className={clsx(classes.margin, classes.textField)}
+                        className={(classes.margin, classes.textField)}
                       >
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.IMPS}
+                              checked={studentFormData.IMPS}
                               onChange={handleBoolean}
                               name="IMPS"
                             />
@@ -606,7 +651,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.GooglePay}
+                              checked={studentFormData.GooglePay}
                               onChange={handleBoolean}
                               name="GooglePay"
                             />
@@ -617,7 +662,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.PhonePe}
+                              checked={studentFormData.PhonePe}
                               onChange={handleBoolean}
                               name="PhonePe"
                             />
@@ -627,7 +672,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.NEFT}
+                              checked={studentFormData.NEFT}
                               onChange={handleBoolean}
                               name="NEFT"
                             />
@@ -638,7 +683,7 @@ function StudentForm3({
                         <FormControlLabel
                           control={
                             <Switch
-                              checked={studentformData.CASH}
+                              checked={studentFormData.CASH}
                               onChange={handleBoolean}
                               name="CASH"
                             />
@@ -652,11 +697,11 @@ function StudentForm3({
                     <TextareaAutosize
                       aria-label="Payment receipt note"
                       name="paymentReceipt"
-                      value={studentformData.paymentReceipt}
+                      value={studentFormData.paymentReceipt}
                       onChange={handleChange}
                       rowsMin={5}
                       placeholder="Payment receipt note"
-                      className={clsx(classes.margin, classes.textField)}
+                      className={(classes.margin, classes.textField)}
                     />
                   </div>
                 </Paper>
@@ -686,7 +731,7 @@ function StudentForm3({
   );
 }
 
-function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
+function StudentForm4({ prevStep, firstStep, studentFormData, handleSubmit }) {
   const classes = useStyles();
   const history = useHistory();
   function dashboard(e) {
@@ -728,7 +773,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.firstname}
+                            {studentFormData.firstName}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -737,7 +782,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.lastname}
+                            {studentFormData.lastName}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -746,7 +791,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.surname}
+                            {studentFormData.surname}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -755,7 +800,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.fathername}
+                            {studentFormData.fatherName}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -764,7 +809,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.mothername}
+                            {studentFormData.motherName}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -773,7 +818,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.nativeLanguage}
+                            {studentFormData.nativeLanguage}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -782,7 +827,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.email}
+                            {studentFormData.email}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -791,7 +836,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.phoneNumber}
+                            {studentFormData.phoneNumber}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -800,7 +845,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.alternatePhone}
+                            {studentFormData.alternatePhone}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -809,7 +854,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.onlineID}
+                            {studentFormData.onlineID}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -818,21 +863,21 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.rollNumber}
+                            {studentFormData.rollNumber}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
                           <StyledTableCell align="left">Age</StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.age}
+                            {studentFormData.age}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
                           <StyledTableCell align="left">Class</StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.class}
+                            {studentFormData.class}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -841,14 +886,14 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.address}
+                            {studentFormData.address}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
                           <StyledTableCell align="left">City</StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.city}
+                            {studentFormData.city}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -857,7 +902,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.pinCode}
+                            {studentFormData.pinCode}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -866,7 +911,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.country}
+                            {studentFormData.country}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -875,7 +920,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.totalPayment}
+                            {studentFormData.totalPayment}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -884,7 +929,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.paymentDue}
+                            {studentFormData.paymentDue}
                           </StyledTableCell>
                         </StyledTableRow>
 
@@ -894,7 +939,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.textarea}
+                            {studentFormData.textarea}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -903,7 +948,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.reading ? "No" : "Yes"}
+                            {!studentFormData.reading ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -912,7 +957,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.listening ? "No" : "Yes"}
+                            {!studentFormData.listening ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -921,7 +966,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.writing ? "No" : "Yes"}
+                            {!studentFormData.writing ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -930,7 +975,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.speaking ? "No" : "Yes"}
+                            {!studentFormData.speaking ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -940,7 +985,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.admissionDate}
+                            {studentFormData.admissionDate}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -949,7 +994,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.IMPS ? "No" : "Yes"}
+                            {!studentFormData.IMPS ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -958,7 +1003,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.GooglePay ? "No" : "Yes"}
+                            {!studentFormData.GooglePay ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -967,7 +1012,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.NEFT ? "No" : "Yes"}
+                            {!studentFormData.NEFT ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -976,7 +1021,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.PhonePe ? "No" : "Yes"}
+                            {!studentFormData.PhonePe ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -985,7 +1030,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {!studentformData.CASH ? "No" : "Yes"}
+                            {!studentFormData.CASH ? "No" : "Yes"}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -994,7 +1039,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.paymentReceipt}
+                            {studentFormData.paymentReceipt}
                           </StyledTableCell>
                         </StyledTableRow>
                         <StyledTableRow>
@@ -1003,7 +1048,7 @@ function StudentForm4({ prevStep, firstStep, studentformData, handleSubmit }) {
                           </StyledTableCell>
                           <StyledTableCell align="left">:</StyledTableCell>
                           <StyledTableCell align="left">
-                            {studentformData.teacherAssigned}
+                            {studentFormData.teacherAssigned}
                           </StyledTableCell>
                         </StyledTableRow>
                       </TableBody>
