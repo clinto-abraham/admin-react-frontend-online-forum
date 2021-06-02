@@ -2,100 +2,82 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./Styles/App.css";
 
-// import TeacherRegister from "./Pages/teacherRegister";
-import TeacherAssigning from "./Pages/teacherAssign";
-import AdminSignIn from "./Pages/AdminSignIn";
-import DashBoardAdmin from "./Pages/Admin";
-import StudentInfo from "./Pages/StudentInfo";
-import SalaryTrack from "./Pages/SalaryTrack";
-import AccountSettingsAdmin from "./Pages/AccountSettingsAdmin";
-import NavbarAdmin from "./Navbars/NavbarAdmin";
-import BottomNavbar from "./Navbars/bottomNavbar";
+import AdminSignIn from "./Pages/AdminSignIn.jsx";
+import DashBoardAdmin from "./Pages/Admin.jsx";
+import StudentInfo from "./Pages/StudentInfo.jsx";
+import SalaryTrack from "./Pages/SalaryTrack.jsx";
+import AccountSettingsAdmin from "./Pages/AccountSettingsAdmin.jsx";
+import NavbarAdmin from "./Navbars/NavbarAdmin.jsx";
+import BottomNavbar from "./Navbars/bottomNavbar.jsx";
+import TeacherAssigning from "./Pages/teacherAssign.jsx";
+import StudentForm from "./Pages/studentForm.jsx";
+import EditStudent from "./Pages/Page-Children/Students-Children/edit.jsx";
+import TeacherForm from "./Pages/TeacherForm.jsx";
+import View from "./Pages/Page-Children/Students-Children/view.jsx";
+
 import { useDispatch } from "react-redux";
 import { getAdmin } from "./redux/actions/adminAction";
 import { getTeachers } from "./redux/actions/teacherActions";
-import View from "./Pages/Page-Children/Students-Children/view";
-
-import StudentForm from "./Pages/studentForm";
-import EditStudent from "./Pages/edit";
 import { Typography } from "@material-ui/core";
 import { NotFound } from "./Not_Found/NotFound";
-import TeacherForm from "./Pages/TeacherForm.jsx";
 import { getStudents } from "./redux/actions/studentAction";
 
 function App() {
   const user = JSON.parse(localStorage.getItem("account"));
- 
-  const [adminData, setAdminData] = useState(null);
-  const [teacherformData, setTeacherformData] = useState(null);
   const dispatch = useDispatch();
-  // dispatch(getAdmin());
-  // dispatch(getTeachers());
-  // dispatch(getStudents());
+  const [state, setState] = useState(false);
   useEffect(() => {
     dispatch(getAdmin());
-  }, [dispatch]);
+  }, [state, dispatch]);
 
   useEffect(() => {
     dispatch(getTeachers());
-  }, [dispatch]);
+  }, [state, dispatch]);
 
   useEffect(() => {
     dispatch(getStudents());
-  }, [dispatch]);
-
+  }, [state, dispatch]);
 
   return (
     <>
       <Router>
-      {user?.result?._id ? (
-        <NavbarAdmin />
-      ) : (
-        <Typography variant="h2">Organization Name{"Fetch"}</Typography>)}
+        {user?.result?._id ? (
+          <NavbarAdmin />
+        ) : (
+          <Typography variant="h2">Organization Name{"Fetch"}</Typography>
+        )}
         <Switch>
           <Route path="/" exact>
-            <AdminSignIn />
+            <AdminSignIn state={state} setState={setState} />
           </Route>
           <Route path="/dashboard" exact>
-            <DashBoardAdmin />
+            <DashBoardAdmin state={state} setState={setState} />
           </Route>
           <Route path="/register-student" exact>
-            <StudentForm />
+            <StudentForm state={state} setState={setState} />
           </Route>
           <Route path="/students-info" exact>
-            <StudentInfo />
+            <StudentInfo state={state} setState={setState} />
           </Route>
           <Route path="/student-info/:id" exact>
-            <View />
+            <View state={state} setState={setState} />
           </Route>
           <Route path="/edit-student-info/:id" exact>
-            <EditStudent />
+            <EditStudent state={state} setState={setState} />
           </Route>
-          {/* <Route path="/register-teacher" exact>
-            <TeacherRegister />
-          </Route> */}
           <Route path="/register-teacher" exact>
-            <TeacherForm />
+            <TeacherForm state={state} setState={setState} />
           </Route>
           <Route path="/assign-teachers" exact>
-            <TeacherAssigning
-              teacherformData={teacherformData}
-              setTeacherformData={setTeacherformData}
-            />
+            <TeacherAssigning state={state} setState={setState} />
           </Route>
           <Route path="/salary-track" exact>
-            <SalaryTrack
-              teacherformData={teacherformData}
-              adminData={adminData}
-            />
+            <SalaryTrack state={state} setState={setState} />
           </Route>
           <Route path="/update-account" exact>
-            <AccountSettingsAdmin
-              adminData={adminData}
-              setAdminData={setAdminData}
-            />
+            <AccountSettingsAdmin state={state} setState={setState} />
           </Route>
-          <Route >
+          <Route>
             <NotFound />
           </Route>
         </Switch>

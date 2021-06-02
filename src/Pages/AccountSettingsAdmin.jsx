@@ -44,7 +44,7 @@ const AccountSettingsAdmin = () => {
   // const { adminData, isLoadings } = useSelector((state) => ({
   //   adminData: state.admin.adminData,
   //   isLoadings: state.admin.isLoadings }), shallowEqual);
-  console.log(admin, isLoading, admins)
+  console.log(teachers, students, isLoading, admin)
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
   const classes = useStyles();
@@ -86,7 +86,7 @@ const AccountSettingsAdmin = () => {
     e.preventDefault();
 
     dispatch(updateAdminAction(updateAccount));
-    clear();
+    clear(e);
   };
 
   const handleChange = (event) => {
@@ -96,7 +96,7 @@ const AccountSettingsAdmin = () => {
     });
   };
 
-  if (!adminData.length && !isLoading)
+  if (!admin.length && !isLoading)
     return "Not found! Administrator data needed to be updated by backend";
   return (
     <>
@@ -106,7 +106,7 @@ const AccountSettingsAdmin = () => {
         <CircularProgress />
       ) : (
         <>
-          {adminData.map((data) => (
+          {admin.map((data) => (
             <div key={data._id}>
               <form autoComplete="off" onClick={handleSubmit}>
                 <Card style={{ backgroundColor: "transparent" }}>

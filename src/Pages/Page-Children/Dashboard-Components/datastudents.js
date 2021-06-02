@@ -14,7 +14,7 @@ import {
   TableSortLabel,
   Tooltip,
 } from "@material-ui/core";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import moment from "moment";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -52,10 +52,12 @@ const DataStudents = (props) => {
                 <CircularProgress />
               ) : (
                 <TableBody>
-                  {students.map((stu) => (
+                  {(students || []).map((stu) => (
                     <TableRow hover key={stu.id}>
                       <TableCell>{stu.rollNumber}</TableCell>
-                      <TableCell>{stu.firstName}  {" "} {stu.lastName} + {" "} {stu.surname}</TableCell>
+                      <TableCell>
+                        {stu.firstName} {stu.lastName} + {stu.surname}
+                      </TableCell>
                       <TableCell>
                         {moment(stu.createdAt).format("DD/MM/YYYY")}
                       </TableCell>
@@ -74,15 +76,17 @@ const DataStudents = (props) => {
             display: "flex",
             justifyContent: "flex-end",
             p: 2,
-          }}>
-            <Link to="/students-info">
-          <Button
-            color="primary"
-            endIcon={<ArrowRightIcon />}
-            size="small"
-            variant="text">
-            View all
-          </Button>
+          }}
+        >
+          <Link to="/students-info">
+            <Button
+              color="primary"
+              endIcon={<ArrowRightIcon />}
+              size="small"
+              variant="text"
+            >
+              View all
+            </Button>
           </Link>
         </Box>
       </Card>

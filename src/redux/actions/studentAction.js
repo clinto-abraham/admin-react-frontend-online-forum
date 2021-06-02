@@ -26,7 +26,7 @@ export const getStudents = () => async (dispatch) => {
 
 export const deleteStudent = (id) => async (dispatch) => {
   try {
-    await await api.deleteStudent(id);
+    await api.deleteStudent(id);
     dispatch({ type: DELETE_STUDENT, payload: id });
   } catch (error) {
     console.log(error);
@@ -34,9 +34,9 @@ export const deleteStudent = (id) => async (dispatch) => {
 };
 // alloted actions in above
 
-export const updateStudent = (id, post) => async (dispatch) => {
+export const updateStudent = (id, updatedStudent) => async (dispatch) => {
   try {
-    const { data } = await api.updateStudent(id, post);
+    const { data } = await api.updateStudent(id, updatedStudent);
     dispatch({ type: UPDATE_STUDENT, payload: data });
   } catch (error) {
     console.log(error);

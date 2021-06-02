@@ -1,5 +1,6 @@
 # Getting Started with Create React App
-
+ "start": "PORT=4000 react-scripts start webpack-dev-server --inline --content-base . --history-api-fallback",
+ 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

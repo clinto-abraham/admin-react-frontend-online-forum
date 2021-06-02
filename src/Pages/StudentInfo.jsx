@@ -14,7 +14,6 @@ import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import { deleteStudent } from "../redux/actions/studentAction";
 import View from "./Page-Children/Students-Children/view";
 import EditIcon from "@material-ui/icons/Edit";
-import EditStudent from "./edit";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -72,7 +71,7 @@ function StudentInfo() {
                     <StyledTableCell align="right">DELETE</StyledTableCell>
                   </TableRow>
                 </TableHead>
-                {students.map((data) => (
+                {(students || []).map((data) => (
                   <TableBody>
                     <StyledTableRow key={data._id}>
                       <StyledTableCell align="left" key={data.rollNumber}>
@@ -94,11 +93,8 @@ function StudentInfo() {
                       </StyledTableCell>
                       {data.contact}
                       <StyledTableCell align="right" key={data._id}>
-                        <Link to="/edit-student-info/:id">
-                          <EditStudent data={data}>
-                            {" "}
-                            <EditIcon />{" "}
-                          </EditStudent>
+                        <Link to={`/edit-student-info/${data._id}`}>
+                           <Button> <EditIcon /></Button>
                         </Link>
                       </StyledTableCell>
                       <StyledTableCell align="right" key={data._id}>
