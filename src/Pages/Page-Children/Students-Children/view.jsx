@@ -46,7 +46,7 @@ export default function View({ data }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+console.log(data)
   return (
     <div>
       <Button onClick={handleClickOpen}>
@@ -86,7 +86,7 @@ export default function View({ data }) {
           <ListItem button className={classes.listItemstyle}>
             <ListItemText
               primary="Full name"
-              secondary={`${data.firstName} ${data.lastName} ${data.surname}`}
+              secondary={`${data.firstName?data.firstName:"_"} ${data.lastName?data.lastName:"_"} ${data.surname?data.surname:"_"}`}
             />
           </ListItem>
           <Divider />
@@ -135,7 +135,7 @@ export default function View({ data }) {
           <ListItem className={classes.listItemstyle} button>
             <ListItemText
               primary="All teachers assigned"
-              secondary={data.teacherAssigned}
+              secondary={(data.RteacherName && data.LteacherName && data.WteacherName && data.SteacherName) ? (data.RteacherName && data.LteacherName && data.WteacherName && data.SteacherName) : "No teachers assigned. Kindly go the edit section."}
             />
           </ListItem>
 
@@ -146,50 +146,3 @@ export default function View({ data }) {
   );
 }
 
-// CASH: true
-// ​​
-// GooglePay: true
-// ​​
-// IMPS: true
-// ​​
-// NEFT: true
-// ​​
-// PhonePe: false
-// ​​
-// __v: 0
-// ​​
-
-// ​​
-
-// ​​
-
-// ​​
-// country: "String"
-// ​​
-// courseCompletion: false
-// ​​
-
-// ​​
-
-// ​​
-// listening: false
-// ​​
-// paymentDue: 10000
-// ​​
-// paymentReceived: 15000
-// ​​
-// pinCode: "String"
-// ​​
-// reading: true
-// ​​
-
-// ​​
-// speaking: true
-// ​​
-
-// ​​
-// textarea: "String"
-// ​​
-// totalPayment: 25000
-// ​​
-// writing: true

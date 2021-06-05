@@ -4,8 +4,124 @@ import { useHistory } from "react-router";
 import TableCell from "@material-ui/core/TableCell";
 import { withStyles, makeStyles} from "@material-ui/core";
 import TableRow from "@material-ui/core/TableRow";
-export const useEdit = () => {
-//    const [updatedStudent, setUpdatedStudent] = useState()
+
+const OptionCustom = ({
+  name,
+  label,
+  value,
+  type,
+  onChange,
+  handleReadingChange,
+  handleSpeakingChange,
+  handleListeningChange,
+  handleWritingChange,
+  variant,
+}) => {
+  const { useStyles } = useEdit();
+  const classes = useStyles();
+  const teachers = useSelector((state) => state.teachers);
+  console.log(teachers);
+  return (
+    <TextField
+      select
+      type={type}
+      id={name}
+      name={name}
+      value={value}
+      placeholder={label}
+      onChange={onChange}
+      className={classes.textField}
+      fullWidth
+      autofocus
+      helperText="Please select teacher"
+      variant="outlined"
+    >
+      {teachers.map((option) => (
+        <MenuItem key={option._id} value={option._id}>
+          {option.firstName?option.firstName: "_"} {option.lastName ? option.lastName : "_"}
+        </MenuItem>
+      ))}
+    </TextField>
+  );
+};
+
+const TextfieldCustom = ({
+  name,
+  label,
+  value,
+  type,
+  onChange,
+  handleChange,
+  handleReadingChange,
+  handleListeningChange,
+  handleSpeakingChange,
+  handleWritingChange,
+  handleLBoolean,
+  handleRBoolean,
+  handleWBoolean,
+  handleSBoolean,
+  variant,
+}) => {
+  const { useStyles } = useEdit();
+  const classes = useStyles();
+  return (
+    <TextField
+      type={type}
+      id={name}
+      name={name}
+      value={value}
+      placeholder={label}
+      onChange={onChange}
+      className={classes.textField}
+      fullWidth
+      autofocus
+      variant={variant}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <BorderColorIcon />
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
+};
+
+const SwitchBarCustom = ({
+  name,
+  label,
+  value,
+  onChange,
+  handleRBoolean,
+  handleLBoolean,
+  handleWBoolean,
+  handleSBoolean,
+ 
+}) => {
+  const { useStyles } = useEdit();
+  const classes = useStyles();
+  return (
+      <FormGroup row>
+        <FormControlLabel
+          control={
+            <Switch
+              id={name}
+              name={name}
+              onChange={onChange}
+              
+              
+              checked={value}
+            />
+          }
+          label={label}
+        />
+      </FormGroup>
+  );
+};
+
+
+export const useEdit = (defaultState) => {
+   const [updatedStudent, setUpdatedStudent] = useState(defaultState)
     
      
 
@@ -46,5 +162,5 @@ export const useEdit = () => {
       const history = useHistory();
       const user = JSON.parse(localStorage.getItem("account"));
      
-    return { useStyles, StyledTableCell, StyledTableRow, history, user }
+    return [ <OptionCustom />, <TextfieldCustom />, <SwitchBarCustom />, updatedStudent,  useStyles, StyledTableCell, StyledTableRow, history, user, setUpdatedStudent ]
 }

@@ -73,37 +73,34 @@ function StudentInfo() {
                 </TableHead>
                 {(students || []).map((data) => (
                   <TableBody>
-                    <StyledTableRow key={data._id}>
-                      <StyledTableCell align="left" key={data.rollNumber}>
+                    <StyledTableRow>
+                      <StyledTableCell align="left"  key={data._id} >
                         <View data={data} />
                       </StyledTableCell>
                       <StyledTableCell
                         component="th"
                         scope="row"
-                        key={data.firstname}
+                        key={data.firstName}
                       >
-                        {data.firstname}
+                        {data.firstName}
                       </StyledTableCell>
                       <StyledTableCell align="right" key={data.email}>
                         {data.email}
                       </StyledTableCell>
 
-                      <StyledTableCell align="right" key={data.class}>
+                      <StyledTableCell align="right" key={data.createdAt}>
                         {data.class}
                       </StyledTableCell>
-                      {data.contact}
-                      <StyledTableCell align="right" key={data._id}>
+                      
+                      <StyledTableCell align="right" key={data.contact}>
                         <Link to={`/edit-student-info/${data._id}`}>
-                           <Button> <EditIcon /></Button>
+                            <EditIcon />
                         </Link>
                       </StyledTableCell>
-                      <StyledTableCell align="right" key={data._id}>
-                        <Button
-                          key={data._id}
-                          onClick={() => dispatch(deleteStudent(data._id))}
-                        >
-                          <DeleteSweepIcon />
-                        </Button>
+                      <StyledTableCell align="right" key={data.lastName}>
+                        
+                          <DeleteSweepIcon  onClick={() => dispatch(deleteStudent(data._id))} />
+                        
                       </StyledTableCell>
                     </StyledTableRow>
                   </TableBody>

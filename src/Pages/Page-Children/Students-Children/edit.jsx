@@ -28,7 +28,10 @@ const OptionCustom = ({
   value,
   type,
   onChange,
-  handleOptionChange,
+  handleReadingChange,
+  handleSpeakingChange,
+  handleListeningChange,
+  handleWritingChange,
   variant,
 }) => {
   const { useStyles } = useEdit();
@@ -46,13 +49,13 @@ const OptionCustom = ({
       onChange={onChange}
       className={classes.textField}
       fullWidth
-      autoFocus
+      autofocus
       helperText="Please select teacher"
       variant="outlined"
     >
       {teachers.map((option) => (
         <MenuItem key={option._id} value={option._id}>
-          {option.firstName} {option.lastName}
+          {option.firstName?option.firstName: "_"} {option.lastName ? option.lastName : "_"}
         </MenuItem>
       ))}
     </TextField>
@@ -66,6 +69,14 @@ const TextfieldCustom = ({
   type,
   onChange,
   handleChange,
+  handleReadingChange,
+  handleListeningChange,
+  handleSpeakingChange,
+  handleWritingChange,
+  handleLBoolean,
+  handleRBoolean,
+  handleWBoolean,
+  handleSBoolean,
   variant,
 }) => {
   const { useStyles } = useEdit();
@@ -80,7 +91,7 @@ const TextfieldCustom = ({
       onChange={onChange}
       className={classes.textField}
       fullWidth
-      autoFocus
+      autofocus
       variant={variant}
       InputProps={{
         endAdornment: (
@@ -98,7 +109,10 @@ const SwitchBarCustom = ({
   label,
   value,
   onChange,
-  handleSwitchChange,
+  handleRBoolean,
+  handleLBoolean,
+  handleWBoolean,
+  handleSBoolean,
  
 }) => {
   const { useStyles } = useEdit();
@@ -111,8 +125,8 @@ const SwitchBarCustom = ({
               id={name}
               name={name}
               onChange={onChange}
-              className={classes.textField}
-              fullWidth
+              
+              
               checked={value}
             />
           }
@@ -121,6 +135,7 @@ const SwitchBarCustom = ({
       </FormGroup>
   );
 };
+// 
 
 export default function EditStudent({ state, setState }) {
   const [updatedStudent, setUpdatedStudent] = useState({
@@ -135,7 +150,6 @@ export default function EditStudent({ state, setState }) {
     phoneNumber: "",
     alternatePhone: "",
     onlineID: "",
-
     rollNumber: "",
     age: "",
     class: "",
@@ -151,50 +165,50 @@ export default function EditStudent({ state, setState }) {
     textarea: "",
     assigned: {
       listening: {
-        opted: false,
-        dateOfAssign: "",
-        moduleEndDate: "",
-        moduleCost: "",
-        teacherName: "",
-        tutorialCost: "",
-        lessonComplete: "",
-        tutorialHrsComplete: "",
-        teacherID: "",
+        Lopted: false,
+        LdateOfAssign: "",
+        LmoduleEndDate: "",
+        LmoduleCost: "",
+        LteacherName: "",
+        LtutorialCost: "",
+        LlessonComplete: "",
+        LtutorialHrsComplete: "",
+        LteacherID: "",
       },
       reading: {
-        opted: false,
-        dateOfAssign: "",
-        moduleEndDate: "",
-        moduleCost: "",
-        teacherName: "",
-        tutorialCost: "",
-        lessonComplete: "",
-        tutorialHrsComplete: "",
-        teacherID: "",
+        Ropted: false,
+        RdateOfAssign: "",
+        RmoduleEndDate: "",
+        RmoduleCost: "",
+        RteacherName: "",
+        RtutorialCost: "",
+        RlessonComplete: "",
+        RtutorialHrsComplete: "",
+        RteacherID: "",
       },
 
       writing: {
-        opted: false,
-        dateOfAssign: "",
-        moduleEndDate: "",
-        moduleCost: "",
-        teacherName: "",
-        tutorialCost: "",
-        lessonComplete: "",
-        tutorialHrsComplete: "",
-        teacherID: "",
+        Wopted: false,
+        WdateOfAssign: "",
+        WmoduleEndDate: "",
+        WmoduleCost: "",
+        WteacherName: "",
+        WtutorialCost: "",
+        WlessonComplete: "",
+        WtutorialHrsComplete: "",
+        WteacherID: "",
       },
 
       speaking: {
-        opted: false,
-        dateOfAssign: "",
-        moduleEndDate: "",
-        moduleCost: "",
-        teacherName: "",
-        tutorialCost: "",
-        lessonComplete: "",
-        tutorialHrsComplete: "",
-        teacherID: "",
+        Sopted: false,
+        SdateOfAssign: "",
+        SmoduleEndDate: "",
+        SmoduleCost: "",
+        SteacherName: "",
+        StutorialCost: "",
+        SlessonComplete: "",
+        StutorialHrsComplete: "",
+        SteacherID: "",
       },
     },
 
@@ -235,50 +249,50 @@ export default function EditStudent({ state, setState }) {
       textarea: "",
       assigned: {
         listening: {
-          opted: false,
-          dateOfAssign: "",
-          moduleEndDate: "",
-          moduleCost: "",
-          teacherName: "",
-          tutorialCost: "",
-          lessonComplete: "",
-          tutorialHrsComplete: "",
-          teacherID: "",
+          Lopted: false,
+          LdateOfAssign: "",
+          LmoduleEndDate: "",
+          LmoduleCost: "",
+          LteacherName: "",
+          LtutorialCost: "",
+          LlessonComplete: "",
+          LtutorialHrsComplete: "",
+          LteacherID: "",
         },
         reading: {
-          opted: false,
-          dateOfAssign: "",
-          moduleEndDate: "",
-          moduleCost: "",
-          teacherName: "",
-          tutorialCost: "",
-          lessonComplete: "",
-          tutorialHrsComplete: "",
-          teacherID: "",
+          Ropted: false,
+          RdateOfAssign: "",
+          RmoduleEndDate: "",
+          RmoduleCost: "",
+          RteacherName: "",
+          RtutorialCost: "",
+          RlessonComplete: "",
+          RtutorialHrsComplete: "",
+          RteacherID: "",
         },
 
         writing: {
-          opted: false,
-          dateOfAssign: "",
-          moduleEndDate: "",
-          moduleCost: "",
-          teacherName: "",
-          tutorialCost: "",
-          lessonComplete: "",
-          tutorialHrsComplete: "",
-          teacherID: "",
+          Wopted: false,
+          WdateOfAssign: "",
+          WmoduleEndDate: "",
+          WmoduleCost: "",
+          WteacherName: "",
+          WtutorialCost: "",
+          WlessonComplete: "",
+          WtutorialHrsComplete: "",
+          WteacherID: "",
         },
 
         speaking: {
-          opted: false,
-          dateOfAssign: "",
-          moduleEndDate: "",
-          moduleCost: "",
-          teacherName: "",
-          tutorialCost: "",
-          lessonComplete: "",
-          tutorialHrsComplete: "",
-          teacherID: "",
+          Sopted: false,
+          SdateOfAssign: "",
+          SmoduleEndDate: "",
+          SmoduleCost: "",
+          SteacherName: "",
+          StutorialCost: "",
+          SlessonComplete: "",
+          StutorialHrsComplete: "",
+          SteacherID: "",
         },
       },
 
@@ -293,43 +307,103 @@ export default function EditStudent({ state, setState }) {
   };
 
   const {
-    StyledTableCell,
-    StyledTableRow,
-    useStyles,
-    history,
-    user,
-  } = useEdit();
+    useStyles, StyledTableCell, StyledTableRow, history, user 
+  } = useEdit({
+    firstName: "",
+    lastName: "",
+    surname: "",
+    fatherName: "",
+    motherName: "",
+    nativeLanguage: "",
+    dateOfBirth: "",
+    email: "",
+    phoneNumber: "",
+    alternatePhone: "",
+    onlineID: "",
 
-  const handleSwitchChange = (e) => {
-    setUpdatedStudent({...updatedStudent, [e.target.name]: !e.target.value})
-  }
-
-  const handleOptionChange = (e) => {
-    setUpdatedStudent((preUpdatedStudent) => ({
-      ...preUpdatedStudent,
-      assigned: {
-        ...preUpdatedStudent.assigned.listening,
-        teacherID: e.target.value,
+    rollNumber: "",
+    age: "",
+    class: "",
+    address: "",
+    city: "",
+    pinCode: "",
+    state: "",
+    country: "India",
+    totalPayment: "",
+    paymentReceived: "",
+    paymentDue: "",
+    paymentReceipt: "",
+    textarea: "",
+    assigned: {
+      listening: {
+        Lopted: false,
+        LdateOfAssign: "",
+        LmoduleEndDate: "",
+        LmoduleCost: "",
+        LteacherName: "",
+        LtutorialCost: "",
+        LlessonComplete: "",
+        LtutorialHrsComplete: "",
+        LteacherID: "",
       },
-    }));
-    // onChange={(event) => {
-    //   setStyle(prevStyle => ({
-    //       ...prevStyle,
-    //       font: { ...prevStyle.font, align: event.target.value }
-    //   }));
-    //   const styles = {
-    //     font: {
-    //         size: {
-    //             value: '22',
-    //             unit: 'px'
-    //         },
-    //         weight: 'bold',
-    //         color: '#663300',
-    //         family: 'arial',
-    //         align: 'center'
-    //     }
-    // };
-  };
+      reading: {
+        Ropted: false,
+        RdateOfAssign: "",
+        RmoduleEndDate: "",
+        RmoduleCost: "",
+        RteacherName: "",
+        RtutorialCost: "",
+        RlessonComplete: "",
+        RtutorialHrsComplete: "",
+        RteacherID: "",
+      },
+
+      writing: {
+        Wopted: false,
+        WdateOfAssign: "",
+        WmoduleEndDate: "",
+        WmoduleCost: "",
+        WteacherName: "",
+        WtutorialCost: "",
+        WlessonComplete: "",
+        WtutorialHrsComplete: "",
+        WteacherID: "",
+      },
+
+      speaking: {
+        Sopted: false,
+        SdateOfAssign: "",
+        SmoduleEndDate: "",
+        SmoduleCost: "",
+        SteacherName: "",
+        StutorialCost: "",
+        SlessonComplete: "",
+        StutorialHrsComplete: "",
+        SteacherID: "",
+      },
+    },
+
+    admissionDate: "",
+    courseCompletion: false,
+    IMPS: false,
+    GooglePay: false,
+    NEFT: false,
+    PhonePe: false,
+    CASH: false,
+  });
+
+ 
+
+  // const handleOptionChange = (e) => {
+  //   setUpdatedStudent({...updatedStudent, assigned: {
+  //     ...updatedStudent.assigned, reading : {
+  //       ...updatedStudent.assigned.reading, [e.target.name]: e.target.value
+  //     }
+  //   }})
+  // }
+  
+  
+ 
   const { id } = useParams();
   const classes = useStyles();
 
@@ -337,6 +411,7 @@ export default function EditStudent({ state, setState }) {
     id ? state.students.find((data) => data._id === id) : null
   );
 
+  
   useEffect(() => {
     if (stu) setUpdatedStudent(stu);
   }, [stu]);
@@ -349,9 +424,71 @@ export default function EditStudent({ state, setState }) {
     dispatch(updateStudent(id, updatedStudent));
     Clear(e);
     setState(!state);
-    console.log(state);
+    // console.log(state);
   };
 
+   // const handleRBoolean = (e) => {
+  //   setUpdatedStudent({...updatedStudent, [e.target.name]: !e.target.value})
+  // }
+  const handleRBoolean = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, reading : {
+         ...updatedStudent.reading, [e.target.name]: !e.target.value
+      }
+    }})
+  }
+  const handleLBoolean = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, listening : {
+        ...updatedStudent.listening, [e.target.name]: !e.target.checked
+      }
+    }})
+  }
+  const handleSBoolean = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, speaking : {
+        ...updatedStudent.speaking, [e.target.name]: !e.target.checked
+      }
+    }})
+  }
+  const handleWBoolean = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, writing : {
+        ...updatedStudent.writing, [e.target.name]: !e.target.checked
+      }
+    }})
+  }
+  const handleReadingChange = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, reading : {
+        ...updatedStudent.reading, [e.target.name]: e.target.value
+      }
+    }})
+  }
+
+  const handleListeningChange = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, listening : {
+        ...updatedStudent.listening, [e.target.name]: e.target.value
+      }
+    }})
+    
+  }
+  console.log(updatedStudent)
+  const handleWritingChange = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, writing : {
+        ...updatedStudent.writing, [e.target.name]: e.target.value
+      }
+    }})
+  }
+  const handleSpeakingChange = (e) => {
+    setUpdatedStudent({...updatedStudent, assigned: {
+      ...updatedStudent.assigned, speaking : {
+        ...updatedStudent.speaking, [e.target.name]: e.target.value
+      }
+    }})
+  }
   const handleChange = (e) => {
     setUpdatedStudent({ ...updatedStudent, [e.target.name]: e.target.value });
   };
@@ -493,6 +630,7 @@ export default function EditStudent({ state, setState }) {
                         <StyledTableCell align="left">
                           <TextfieldCustom
                             label="Date of birth"
+                            type="Date"
                             name="dateOfBirth"
                             value={updatedStudent.dateOfBirth}
                             onChange={handleChange}
@@ -507,6 +645,7 @@ export default function EditStudent({ state, setState }) {
                         <StyledTableCell align="left">
                           <TextfieldCustom
                             label="Email"
+                            
                             name="email"
                             value={updatedStudent.email}
                             onChange={handleChange}
@@ -522,6 +661,7 @@ export default function EditStudent({ state, setState }) {
                           <TextfieldCustom
                             label="Contact number"
                             name="phoneNumber"
+                            type="number"
                             value={updatedStudent.phoneNumber}
                             onChange={handleChange}
                           />
@@ -535,6 +675,7 @@ export default function EditStudent({ state, setState }) {
                         <StyledTableCell align="left">
                           <TextfieldCustom
                             label="Alternate contact No."
+                            type="number"
                             name="alternatePhone"
                             value={updatedStudent.alternatePhone}
                             onChange={handleChange}
@@ -548,11 +689,27 @@ export default function EditStudent({ state, setState }) {
                           <TextfieldCustom
                             label="OnlineID@"
                             name="onlineID"
+                            
                             value={updatedStudent.onlineID}
                             onChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">Roll number assigned</StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                          <TextfieldCustom
+                            label="Roll number"
+                            name="rollNumber"
+                        
+                            value={updatedStudent.rollNumber}
+                            onChange={handleChange}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
                       <StyledTableRow>
                         <StyledTableCell align="left">
                           Listening
@@ -563,70 +720,274 @@ export default function EditStudent({ state, setState }) {
                             type="Date"
                             variant="outlined"
                             label="Date of assign"
-                            name="dateOfAssign"
-                            value={updatedStudent.assigned.listening.dateOfAssign}
-                            onChange={handleChange}
+                            name="LdateOfAssign"
+                            value={updatedStudent.LdateOfAssign}
+                            onChange={handleListeningChange}
                           />
                           <TextfieldCustom
                             type="Date"
                             variant="outlined"
                             label="Module end date"
-                            name="moduleEndDate"
-                            value={updatedStudent.assigned.listening.moduleEndDate}
-                            onChange={handleChange}
+                            name="LmoduleEndDate"
+                            value={updatedStudent.LmoduleEndDate}
+                            onChange={handleListeningChange}
                           />
                           <TextfieldCustom
                             label="Module cost"
-                            name="moduleCost"
-                            value={updatedStudent.assigned.listening.moduleCost}
-                            onChange={handleChange}
+                            name="LmoduleCost"
+                            value={updatedStudent.LmoduleCost}
+                            onChange={handleListeningChange}
                           />
                           <OptionCustom
                             label="Select"
-                            name="teacherID"
-                            value={updatedStudent.assigned.listening.teacherID}
-                            onChange={handleOptionChange}
+                            name="LteacherID"
+                            value={updatedStudent.LteacherID}
+                            onChange={handleListeningChange}
                           />
                           <TextfieldCustom
                             label="Cost of tutorial"
-                            name="tutorialCost"
-                            value={updatedStudent.assigned.listening.tutorialCost}
-                            onChange={handleChange}
+                            name="LtutorialCost"
+                            value={updatedStudent.LtutorialCost}
+                            onChange={handleListeningChange}
                           />
                           <TextfieldCustom
                             label="Number of lesson complete"
-                            name="lessonComplete"
-                            value={updatedStudent.assigned.listening.lessonComplete}
-                            onChange={handleChange}
+                            name="LlessonComplete"
+                            value={updatedStudent.LlessonComplete}
+                            onChange={handleListeningChange}
                           />
 
                           <SwitchBarCustom
                             label="Switch listening module"
-                            name="opted"
-                            value={updatedStudent.assigned.listening.opted}
-                            onChange={handleSwitchChange}
+                            name="Lopted"
+                            value={updatedStudent.Lopted}
+                            onChange={handleLBoolean}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
+
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">
+                          Reading
+                        </StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Date of assign"
+                            name="RdateOfAssign"
+                            value={updatedStudent.RdateOfAssign}
+                            onChange={handleReadingChange}
+                          />
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Module end date"
+                            name="RmoduleEndDate"
+                            value={updatedStudent.RmoduleEndDate}
+                            onChange={handleReadingChange}
+                          />
+                          <TextfieldCustom
+                            label="Module cost"
+                            name="RmoduleCost"
+                            value={updatedStudent.RmoduleCost}
+                            onChange={handleReadingChange}
+                          />
+                          <OptionCustom
+                            label="Select"
+                            name="RteacherID"
+                            value={updatedStudent.RteacherID}
+                            onChange={handleReadingChange}
+                          />
+                          <TextfieldCustom
+                            label="Cost of tutorial"
+                            name="RtutorialCost"
+                            value={updatedStudent.RtutorialCost}
+                            onChange={handleReadingChange}
+                          />
+                          <TextfieldCustom
+                            label="Number of lesson complete"
+                            name="RlessonComplete"
+                            value={updatedStudent.RlessonComplete}
+                            onChange={handleReadingChange}
+                          />
+
+                          <SwitchBarCustom
+                            label="Switch Reading module"
+                            name="Ropted"
+                            value={updatedStudent.Ropted}
+                            onChange={handleRBoolean}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">
+                          Speaking
+                        </StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Date of assign"
+                            name="SdateOfAssign"
+                            value={updatedStudent.SdateOfAssign}
+                            onChange={handleSpeakingChange}
+                          />
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Module end date"
+                            name="SmoduleEndDate"
+                            value={updatedStudent.SmoduleEndDate}
+                            onChange={handleSpeakingChange}
+                          />
+                          <TextfieldCustom
+                            label="Module cost"
+                            name="SmoduleCost"
+                            value={updatedStudent.SmoduleCost}
+                            onChange={handleSpeakingChange}
+                          />
+                          <OptionCustom
+                            label="Select"
+                            name="SteacherID"
+                            value={updatedStudent.SteacherID}
+                            onChange={handleSpeakingChange}
+                          />
+                          <TextfieldCustom
+                            label="Cost of tutorial"
+                            name="StutorialCost"
+                            value={updatedStudent.StutorialCost}
+                            onChange={handleSpeakingChange}
+                          />
+                          <TextfieldCustom
+                            label="Number of lesson complete"
+                            name="SlessonComplete"
+                            value={updatedStudent.SlessonComplete}
+                            onChange={handleSpeakingChange}
+                          />
+
+                          <SwitchBarCustom
+                            label="Switch Speaking module"
+                            name="Sopted"
+                            value={updatedStudent.Sopted}
+                            onChange={handleSBoolean}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">
+                          Writing
+                        </StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Date of assign"
+                            name="WdateOfAssign"
+                            value={updatedStudent.WdateOfAssign}
+                            onChange={handleWritingChange}
+                          />
+                          <TextfieldCustom
+                            type="Date"
+                            variant="outlined"
+                            label="Module end date"
+                            name="WmoduleEndDate"
+                            value={updatedStudent.WmoduleEndDate}
+                            onChange={handleWritingChange}
+                          />
+                          <TextfieldCustom
+                            label="Module cost"
+                            name="WmoduleCost"
+                            value={updatedStudent.WmoduleCost}
+                            onChange={handleWritingChange}
+                          />
+                          <OptionCustom
+                            label="Select"
+                            name="WteacherID"
+                            value={updatedStudent.WteacherID}
+                            onChange={handleWritingChange}
+                          />
+                          <TextfieldCustom
+                            label="Cost of tutorial"
+                            name="WtutorialCost"
+                            value={updatedStudent.WtutorialCost}
+                            onChange={handleWritingChange}
+                          />
+                          <TextfieldCustom
+                            label="Number of lesson complete"
+                            name="WlessonComplete"
+                            value={updatedStudent.WlessonComplete}
+                            onChange={handleWritingChange}
+                          />
+
+                          <SwitchBarCustom
+                            label="Switch Writing module"
+                            name="Wopted"
+                            value={updatedStudent.Wopted}
+                            onChange={handleWBoolean}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+                      
+                      <StyledTableRow>
+                        <StyledTableCell align="left">Age</StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                          <TextfieldCustom
+                            label="Age"
+                            name="age"
+                            type="number"
+                            value={updatedStudent.age}
+                            onChange={handleChange}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
                       <StyledTableRow>
                         <StyledTableCell align="left">Class</StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.class}
+                        <TextfieldCustom
+                            label="Class"
+                            name="class"
+                            
+                            value={updatedStudent.class}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                       <StyledTableRow>
                         <StyledTableCell align="left">Address</StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.address}
+                        <TextfieldCustom
+                            label="Address"
+                            name="address"
+                          
+                            value={updatedStudent.address}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                       <StyledTableRow>
                         <StyledTableCell align="left">City</StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.city}
+                        <TextfieldCustom
+                            label="City"
+                            name="city"
+                            
+                            value={updatedStudent.city}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                       <StyledTableRow>
@@ -635,14 +996,26 @@ export default function EditStudent({ state, setState }) {
                         </StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.pinCode}
+                        <TextfieldCustom
+                            label="Postal Code"
+                            name="pinCode"
+                            type="number"
+                            value={updatedStudent.pinCode}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                       <StyledTableRow>
                         <StyledTableCell align="left">Country</StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.country}
+                        <TextfieldCustom
+                            label="Country"
+                            name="country"
+                            
+                            value={updatedStudent.country}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
                       <StyledTableRow>
@@ -651,16 +1024,61 @@ export default function EditStudent({ state, setState }) {
                         </StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.totalPayment}
+                        <TextfieldCustom
+                            label="Total Payment"
+                            name="totalPayment"
+                            type="number"
+                            value={updatedStudent.totalPayment}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">
+                          Payment received
+                        </StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                        <TextfieldCustom
+                            label="paymentReceived"
+                            name="paymentReceived"
+                            type="number"
+                            value={updatedStudent.paymentReceived}
+                            onChange={handleChange}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
                       <StyledTableRow>
                         <StyledTableCell align="left">
                           Payment due
                         </StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.paymentDue}
+                        <TextfieldCustom
+                            label="Payment due"
+                            name="paymentDue"
+                            type="number"
+                            value={updatedStudent.paymentDue}
+                            onChange={handleChange}
+                          />
+                        </StyledTableCell>
+                      </StyledTableRow>
+
+                      <StyledTableRow>
+                        <StyledTableCell align="left">
+                          Payment receipt
+                        </StyledTableCell>
+                        <StyledTableCell align="left">:</StyledTableCell>
+                        <StyledTableCell align="left">
+                        <TextfieldCustom
+                            label="Payment receipt"
+                            name="paymentReceipt"
+                            
+                            value={updatedStudent.paymentReceipt}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
 
@@ -670,121 +1088,22 @@ export default function EditStudent({ state, setState }) {
                         </StyledTableCell>
                         <StyledTableCell align="left">:</StyledTableCell>
                         <StyledTableCell align="left">
-                          {stu.textarea}
+                        <TextfieldCustom
+                            label="Text area"
+                            name="textarea"
+                            
+                            value={updatedStudent.textarea}
+                            onChange={handleChange}
+                          />
                         </StyledTableCell>
                       </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Reading module opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.reading = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Listening module opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.listening = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Writing module opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.writing = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Speaking module opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.speaking = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          {" "}
-                          Date of admission
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {stu.admissionDate}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment mode - IMPS opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.IMPS = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment mode - GooglePay opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.GooglePay = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment mode - NEFT opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.NEFT = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment mode - PhonePe opted
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.PhonePe = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment mode - CASH
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {(stu.CASH = false ? "Yes" : "No")}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Payment receipt
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {stu.paymentReceipt}
-                        </StyledTableCell>
-                      </StyledTableRow>
-                      <StyledTableRow>
-                        <StyledTableCell align="left">
-                          Teacher assigned
-                        </StyledTableCell>
-                        <StyledTableCell align="left">:</StyledTableCell>
-                        <StyledTableCell align="left">
-                          {stu.teacherAssigned}
-                        </StyledTableCell>
-                      </StyledTableRow>
+                 
                     </TableBody>
 
-                    <Button
+                    
+                  </Table>
+                </TableContainer>
+                <Button
                       color="primary"
                       variant="contained"
                       onClick={handleSubmit}
@@ -802,8 +1121,6 @@ export default function EditStudent({ state, setState }) {
                     >
                       Clear
                     </Button>
-                  </Table>
-                </TableContainer>
               </Paper>
             </Paper>
           </div>
@@ -812,3 +1129,113 @@ export default function EditStudent({ state, setState }) {
     </>
   );
 }
+
+    //  <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Reading module opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.reading = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Listening module opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.listening = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Writing module opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.writing = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Speaking module opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.speaking = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       {" "}
+    //                       Date of admission
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {stu.admissionDate}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment mode - IMPS opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.IMPS = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment mode - GooglePay opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.GooglePay = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment mode - NEFT opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.NEFT = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment mode - PhonePe opted
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.PhonePe = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment mode - CASH
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {(stu.CASH = false ? "Yes" : "No")}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Payment receipt
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {stu.paymentReceipt}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow>
+    //                   <StyledTableRow>
+    //                     <StyledTableCell align="left">
+    //                       Teacher assigned
+    //                     </StyledTableCell>
+    //                     <StyledTableCell align="left">:</StyledTableCell>
+    //                     <StyledTableCell align="left">
+    //                       {stu.teacherAssigned}
+    //                     </StyledTableCell>
+    //                   </StyledTableRow> 

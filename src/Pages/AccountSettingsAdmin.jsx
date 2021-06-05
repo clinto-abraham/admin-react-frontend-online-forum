@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { deepOrange } from "@material-ui/core/colors";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -40,11 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AccountSettingsAdmin = () => {
   const admin = useSelector((state) => state.admin);
-  const { teachers, isLoading, students} = useSelector((state) => ({teachers : state.teachers, students: state.students}), shallowEqual);
-  // const { adminData, isLoadings } = useSelector((state) => ({
-  //   adminData: state.admin.adminData,
-  //   isLoadings: state.admin.isLoadings }), shallowEqual);
-  console.log(teachers, students, isLoading, admin)
+  
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
   const classes = useStyles();
@@ -63,30 +59,17 @@ const AccountSettingsAdmin = () => {
 
   // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
-  // useEffect(() => {
-  //   if (post) setPostData(post);
-  // }, [post]);
-
-  const clear = (e) => {
-    e.preventDefault();
-    setUpdateAccount({
-      name: "",
-      email: "",
-      contact: "",
-      organization: "",
-      GST: "",
-      uniqueEmployeeID: "",
-      username: "",
-      password: "",
-      pictureFile: "",
-    });
-  };
+  useEffect(() => {
+    if (admin) setUpdateAccount(admin);
+  }, [admin]);
+console.log(updateAccount)
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     dispatch(updateAdminAction(updateAccount));
-    clear(e);
+    
   };
 
   const handleChange = (event) => {
@@ -96,15 +79,13 @@ const AccountSettingsAdmin = () => {
     });
   };
 
-  if (!admin.length && !isLoading)
-    return "Not found! Administrator data needed to be updated by backend";
+  if (!admin.length)
+    return <CircularProgress />;
   return (
     <>
       {!user?.result?._id ? (
         history.push("/")
-      ) : isLoading ? (
-        <CircularProgress />
-      ) : (
+      ) : 
         <>
           {admin.map((data) => (
             <div key={data._id}>
@@ -125,8 +106,8 @@ const AccountSettingsAdmin = () => {
                           <Avatar
                             className={classes.avatar}
                             key={data.name}
-                            src={data.img ? data.img : data.name[0]}>
-                            {}
+                            src={data.pictureFile ? data.pictureFile : data.name[0]}>
+                           <Typography variant="h3" > {!data.pictureFile ? data.name[0] : null} </Typography>
                           </Avatar>
                         </ListItemAvatar>
                         {/* photo below */}
@@ -161,7 +142,7 @@ const AccountSettingsAdmin = () => {
                             startAdornment: (
                               <InputAdornment position="start">
                                 {" "}
-                                {data.name} <ChevronRightIcon />{" "}
+                                {updateAccount.name} <ChevronRightIcon />{" "}
                               </InputAdornment>
                             ),
                             endAdornment: (
@@ -224,7 +205,7 @@ const AccountSettingsAdmin = () => {
                       <Grid item md={6} xs={12}>
                         <TextField
                           fullWidth
-                          label="Email id"
+                          label="GST registration number"
                           name="GST"
                           onChange={handleChange}
                           required
@@ -354,7 +335,7 @@ const AccountSettingsAdmin = () => {
             </div>
           ))}
         </>
-      )}
+      }
     </>
   );
 };
