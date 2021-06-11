@@ -9,7 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, CircularProgress, Typography } from "@material-ui/core";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import { deleteStudent } from "../redux/actions/studentAction";
 import View from "./Page-Children/Students-Children/view";
@@ -46,6 +46,8 @@ function StudentInfo() {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("account"));
   const history = useHistory();
+  if (!students.length) return (<><Typography variant="h3">Kindly check the internet connection or reload the page</Typography> <CircularProgress /></>)
+  
   return (
     <>
       {!user?.result?._id ? (

@@ -22,3 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# "start": "start react-scripts start webpack-dev-server --inline --content-base . --history-api-fallback",
+# "build": "CI= react-scripts build",
+#  npm i --save-dev webpack-dev-server webpack-cli
+# npm i --save-dev babel-core babel-loader babel-preset-env babel-preset-react html-webpack-plugin

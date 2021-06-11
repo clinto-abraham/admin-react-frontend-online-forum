@@ -17,7 +17,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStudent } from "../../../redux/actions/studentAction";
-import { useEdit } from "../../../Custom_Hooks/useEdit";
+import useEdit  from "../../../Custom_Hooks/useEdit";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -34,7 +34,7 @@ const OptionCustom = ({
   handleWritingChange,
   variant,
 }) => {
-  const { useStyles } = useEdit();
+  const [ useStyles ] = useEdit();
   const classes = useStyles();
   const teachers = useSelector((state) => state.teachers);
   console.log(teachers);
@@ -67,7 +67,6 @@ const TextfieldCustom = ({
   label,
   value,
   type,
-  onChange,
   handleChange,
   handleReadingChange,
   handleListeningChange,
@@ -79,7 +78,7 @@ const TextfieldCustom = ({
   handleSBoolean,
   variant,
 }) => {
-  const { useStyles } = useEdit();
+  const [ useStyles ] = useEdit();
   const classes = useStyles();
   return (
     <TextField
@@ -88,7 +87,7 @@ const TextfieldCustom = ({
       name={name}
       value={value}
       placeholder={label}
-      onChange={onChange}
+      onChange={handleChange}
       className={classes.textField}
       fullWidth
       autofocus
@@ -115,7 +114,7 @@ const SwitchBarCustom = ({
   handleSBoolean,
  
 }) => {
-  const { useStyles } = useEdit();
+  const [ useStyles ] = useEdit();
   const classes = useStyles();
   return (
       <FormGroup row>
@@ -138,6 +137,9 @@ const SwitchBarCustom = ({
 // 
 
 export default function EditStudent({ state, setState }) {
+    const history = useHistory();
+    const user = JSON.parse(localStorage.getItem("account"));
+
   const [updatedStudent, setUpdatedStudent] = useState({
     firstName: "",
     lastName: "",
@@ -306,91 +308,9 @@ export default function EditStudent({ state, setState }) {
     });
   };
 
-  const {
-    useStyles, StyledTableCell, StyledTableRow, history, user 
-  } = useEdit({
-    firstName: "",
-    lastName: "",
-    surname: "",
-    fatherName: "",
-    motherName: "",
-    nativeLanguage: "",
-    dateOfBirth: "",
-    email: "",
-    phoneNumber: "",
-    alternatePhone: "",
-    onlineID: "",
-
-    rollNumber: "",
-    age: "",
-    class: "",
-    address: "",
-    city: "",
-    pinCode: "",
-    state: "",
-    country: "India",
-    totalPayment: "",
-    paymentReceived: "",
-    paymentDue: "",
-    paymentReceipt: "",
-    textarea: "",
-    assigned: {
-      listening: {
-        Lopted: false,
-        LdateOfAssign: "",
-        LmoduleEndDate: "",
-        LmoduleCost: "",
-        LteacherName: "",
-        LtutorialCost: "",
-        LlessonComplete: "",
-        LtutorialHrsComplete: "",
-        LteacherID: "",
-      },
-      reading: {
-        Ropted: false,
-        RdateOfAssign: "",
-        RmoduleEndDate: "",
-        RmoduleCost: "",
-        RteacherName: "",
-        RtutorialCost: "",
-        RlessonComplete: "",
-        RtutorialHrsComplete: "",
-        RteacherID: "",
-      },
-
-      writing: {
-        Wopted: false,
-        WdateOfAssign: "",
-        WmoduleEndDate: "",
-        WmoduleCost: "",
-        WteacherName: "",
-        WtutorialCost: "",
-        WlessonComplete: "",
-        WtutorialHrsComplete: "",
-        WteacherID: "",
-      },
-
-      speaking: {
-        Sopted: false,
-        SdateOfAssign: "",
-        SmoduleEndDate: "",
-        SmoduleCost: "",
-        SteacherName: "",
-        StutorialCost: "",
-        SlessonComplete: "",
-        StutorialHrsComplete: "",
-        SteacherID: "",
-      },
-    },
-
-    admissionDate: "",
-    courseCompletion: false,
-    IMPS: false,
-    GooglePay: false,
-    NEFT: false,
-    PhonePe: false,
-    CASH: false,
-  });
+  const [
+    useStyles, StyledTableCell, StyledTableRow
+  ] = useEdit();
 
  
 
@@ -493,8 +413,6 @@ export default function EditStudent({ state, setState }) {
     setUpdatedStudent({ ...updatedStudent, [e.target.name]: e.target.value });
   };
 
-  console.log(updatedStudent);
-
   function handleBack() {
     history.push("/students-info");
   }
@@ -550,7 +468,7 @@ export default function EditStudent({ state, setState }) {
                             label="First Name"
                             name="firstName"
                             value={updatedStudent.firstName}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -564,7 +482,7 @@ export default function EditStudent({ state, setState }) {
                             label="Last Name"
                             name="lastName"
                             value={updatedStudent.lastName}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -576,7 +494,7 @@ export default function EditStudent({ state, setState }) {
                             label="Surname"
                             name="surname"
                             value={updatedStudent.surname}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -590,7 +508,7 @@ export default function EditStudent({ state, setState }) {
                             label="Father name"
                             name="fatherName"
                             value={updatedStudent.fatherName}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -604,7 +522,7 @@ export default function EditStudent({ state, setState }) {
                             label="Mother name"
                             name="motherName"
                             value={updatedStudent.motherName}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -618,7 +536,7 @@ export default function EditStudent({ state, setState }) {
                             label="Native language"
                             name="nativeLanguage"
                             value={updatedStudent.nativeLanguage}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -633,7 +551,7 @@ export default function EditStudent({ state, setState }) {
                             type="Date"
                             name="dateOfBirth"
                             value={updatedStudent.dateOfBirth}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -648,7 +566,7 @@ export default function EditStudent({ state, setState }) {
                             
                             name="email"
                             value={updatedStudent.email}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -663,7 +581,7 @@ export default function EditStudent({ state, setState }) {
                             name="phoneNumber"
                             type="number"
                             value={updatedStudent.phoneNumber}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -678,7 +596,7 @@ export default function EditStudent({ state, setState }) {
                             type="number"
                             name="alternatePhone"
                             value={updatedStudent.alternatePhone}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -691,7 +609,7 @@ export default function EditStudent({ state, setState }) {
                             name="onlineID"
                             
                             value={updatedStudent.onlineID}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -705,7 +623,7 @@ export default function EditStudent({ state, setState }) {
                             name="rollNumber"
                         
                             value={updatedStudent.rollNumber}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -779,7 +697,7 @@ export default function EditStudent({ state, setState }) {
                             label="Date of assign"
                             name="RdateOfAssign"
                             value={updatedStudent.RdateOfAssign}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
                           <TextfieldCustom
                             type="Date"
@@ -787,38 +705,38 @@ export default function EditStudent({ state, setState }) {
                             label="Module end date"
                             name="RmoduleEndDate"
                             value={updatedStudent.RmoduleEndDate}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
                           <TextfieldCustom
                             label="Module cost"
                             name="RmoduleCost"
                             value={updatedStudent.RmoduleCost}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
                           <OptionCustom
                             label="Select"
                             name="RteacherID"
                             value={updatedStudent.RteacherID}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
                           <TextfieldCustom
                             label="Cost of tutorial"
                             name="RtutorialCost"
                             value={updatedStudent.RtutorialCost}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
                           <TextfieldCustom
                             label="Number of lesson complete"
                             name="RlessonComplete"
                             value={updatedStudent.RlessonComplete}
-                            onChange={handleReadingChange}
+                            handleReadingChange={handleReadingChange}
                           />
 
                           <SwitchBarCustom
                             label="Switch Reading module"
                             name="Ropted"
                             value={updatedStudent.Ropted}
-                            onChange={handleRBoolean}
+                            handleRBoolean={handleRBoolean}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -946,7 +864,7 @@ export default function EditStudent({ state, setState }) {
                             name="age"
                             type="number"
                             value={updatedStudent.age}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -960,7 +878,7 @@ export default function EditStudent({ state, setState }) {
                             name="class"
                             
                             value={updatedStudent.class}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -973,7 +891,7 @@ export default function EditStudent({ state, setState }) {
                             name="address"
                           
                             value={updatedStudent.address}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -986,7 +904,7 @@ export default function EditStudent({ state, setState }) {
                             name="city"
                             
                             value={updatedStudent.city}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1001,7 +919,7 @@ export default function EditStudent({ state, setState }) {
                             name="pinCode"
                             type="number"
                             value={updatedStudent.pinCode}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1014,7 +932,7 @@ export default function EditStudent({ state, setState }) {
                             name="country"
                             
                             value={updatedStudent.country}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1029,7 +947,7 @@ export default function EditStudent({ state, setState }) {
                             name="totalPayment"
                             type="number"
                             value={updatedStudent.totalPayment}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1045,7 +963,7 @@ export default function EditStudent({ state, setState }) {
                             name="paymentReceived"
                             type="number"
                             value={updatedStudent.paymentReceived}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1061,7 +979,7 @@ export default function EditStudent({ state, setState }) {
                             name="paymentDue"
                             type="number"
                             value={updatedStudent.paymentDue}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1077,7 +995,7 @@ export default function EditStudent({ state, setState }) {
                             name="paymentReceipt"
                             
                             value={updatedStudent.paymentReceipt}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>
@@ -1093,7 +1011,7 @@ export default function EditStudent({ state, setState }) {
                             name="textarea"
                             
                             value={updatedStudent.textarea}
-                            onChange={handleChange}
+                            handleChange={handleChange}
                           />
                         </StyledTableCell>
                       </StyledTableRow>

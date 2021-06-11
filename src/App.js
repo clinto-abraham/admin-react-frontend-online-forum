@@ -12,6 +12,7 @@ import BottomNavbar from "./Navbars/bottomNavbar.jsx";
 import TeacherAssigning from "./Pages/teacherAssign.jsx";
 import StudentForm from "./Pages/studentForm.jsx";
 import EditStudent from "./Pages/Page-Children/Students-Children/edit.jsx";
+// import EditCopy from "./Pages/Page-Children/Students-Children/editCopy.jsx";
 import TeacherForm from "./Pages/TeacherForm.jsx";
 import View from "./Pages/Page-Children/Students-Children/view.jsx";
 
@@ -65,6 +66,10 @@ function App() {
           <Route path="/edit-student-info/:id" exact>
             <EditStudent state={state} setState={setState} />
           </Route>
+          {/* <Route path="/edit-student-info/:id" exact>
+            <EditCopy state={state} setState={setState} />
+          </Route> */}
+          
           <Route path="/register-teacher" exact>
             <TeacherForm state={state} setState={setState} />
           </Route>

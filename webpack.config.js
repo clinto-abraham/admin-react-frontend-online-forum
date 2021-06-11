@@ -1,74 +1,39 @@
-const path = require("path");
+ const path = require("path");
 
 module.exports = {
-  mode: "production", // "production" | "development" | "none"
-  // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  entry: "./app/entry", // string | object | array
-  // defaults to ./src
-  // Here the application starts executing
-  // and webpack starts bundling
+  mode: "production",
+  entry: "./src/index.js", 
   output: {
-    // options related to how webpack emits results
-    path: path.resolve(__dirname, "dist"), // string (default)
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
-    filename: "[name].js", // string (default)
-    // the filename template for entry chunks
+    path: path.resolve(__dirname, "public"),
+    filename: "bundle.js", 
     publicPath: "/assets/", // string
     // the url to the output directory resolved relative to the HTML page
     library: {
-      // There is also an old syntax for this available (click to show)
       type: "umd", // universal module definition
-      // the type of the exported library
       name: "MyLibrary", // string | string[]
-      // the name of the exported library
-
-      /* Advanced output.library configuration (click to show) */
     },
     uniqueName: "admin-control-forum", // (defaults to package.json "name")
-    // unique name for this build to avoid conflicts with other builds in the same HTML
     name: "my-config",
-    // name of the configuration, shown in output
-    /* Advanced output configuration (click to show) */
-    /* Expert output configuration 1 (on own risk) */
-    /* Expert output configuration 2 (on own risk) */
+
   },
   module: {
-    // configuration regarding modules
+   
     rules: [
-      // rules for modules (configure loaders, parser options, etc.)
       {
-        // Conditions:
+        loader: 'babel-loader',
         test: /\.jsx?$/,
-        include: [path.resolve(__dirname, "app")],
-        exclude: [path.resolve(__dirname, "app/demo-files")],
-        // these are matching conditions, each accepting a regular expression or string
-        // test and include have the same behavior, both must be matched
-        // exclude must not be matched (takes preferrence over test and include)
-        // Best practices:
-        // - Use RegExp only in test and for filename matching
-        // - Use arrays of absolute paths in include and exclude to match the full path
-        // - Try to avoid exclude and prefer include
-        // Each condition can also receive an object with "and", "or" or "not" properties
-        // which are an array of conditions.
-        // issuer: /\.css$/,
-        // issuer: path.resolve(__dirname, "app"),
-        // issuer: { and: [/\.css$/, path.resolve(__dirname, "app")] },
-        // issuer: { or: [/\.css$/, path.resolve(__dirname, "app")] },
-        // issuer: { not: [/\.css$/] },
-        // issuer: [/\.css$/, path.resolve(__dirname, "app")], // like "or"
-        // conditions for the issuer (the origin of the import)
-        /* Advanced conditions (click to show) */
+        include: [path.resolve(__dirname, "src")],
+        exclude: [path.resolve(__dirname, "node_modules")],
+    
 
-        // Actions:
-        loader: "babel-loader",
-        // the loader which should be applied, it'll be resolved relative to the context
         options: {
-          presets: ["es2015"],
+          presets: ["es2017"],
         },
         // options for the loader
         use: [
-          // apply multiple loaders and options instead
+          {
+            loader: 'babel-loader'
+          },
           "htmllint-loader",
           {
             loader: "html-loader",
@@ -90,7 +55,14 @@ module.exports = {
       {
         // ... (conditions)
         rules: [
-          // ... (rules)
+          {
+            test: /\.s?css$/,
+            use: [
+              'style-loader',
+              'css-loader',
+              'sass-loader'
+            ]         
+          }
         ],
         // use all of these nested rules (combine with conditions to be useful)
       },
@@ -231,74 +203,18 @@ module.exports = {
     contentBase: "./",
     port: 4000, // <--- Add this line and choose your own port number
   },
-  // devServer: {
-  //   proxy: {
-  //     // proxy URLs to backend development server
-  //     "/api": "http://localhost:4000",
-  //   },
-  //   contentBase: path.join(__dirname, "public"), // boolean | string | array, static file location
-  //   compress: true, // enable gzip compression
-  //   historyApiFallback: true, // true for index.html upon 404, object for multiple paths
-  //   hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
-  //   https: false, // true for self-signed, object for cert authority
-  //   noInfo: true, // only errors & warns on hot reload
-  //   // ...
-  // },
-  // experiments: {
-  //   asyncWebAssembly: true,
-  //   // WebAssembly as async module (Proposal)
-  //   syncWebAssembly: true,
-  //   // WebAssembly as sync module (deprecated)
-  //   outputModule: true,
-  //   // Allow to output ESM
-  //   topLevelAwait: true,
-  //   // Allow to use await on module evaluation (Proposal)
-  // },
-  // plugins: [
-  //   // ...
-  // ],
-  // // list of additional plugins
-  // optimization: {
-  //   chunkIds: "size",
-  //   // method of generating ids for chunks
-  //   moduleIds: "size",
-  //   // method of generating ids for modules
-  //   mangleExports: "size",
-  //   // rename export names to shorter names
-  //   minimize: true,
-  //   // minimize the output files
-  //   minimizer: [new CssMinimizer(), "..."],
-  //   // minimizers to use for the output files
-
-  //   /* Advanced optimizations (click to show) */
-
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       "my-name": {
-  //         // define groups of modules with specific
-  //         // caching behavior
-  //         test: /\.sass$/,
-  //         type: "css/mini-extract",
-
-  //         /* Advanced selectors (click to show) */
-
-  //         /* Advanced effects (click to show) */
-  //       },
-  //     },
-
-  //     fallbackCacheGroup: {
-  //       /* Advanced (click to show) */
-  //     },
-
-  //     /* Advanced selectors (click to show) */
-
-  //     /* Advanced effects (click to show) */
-
-  //     /* Expert settings (click to show) */
-  //   },
-  // },
-
-  /* Advanced configuration (click to show) */
-  /* Advanced caching configuration (click to show) */
-  /* Advanced build configuration (click to show) */
+  devServer: {
+    proxy: {
+      // proxy URLs to backend development server
+      "/api": "https://backend-edu-forum.herokuapp.com/",
+    },
+    contentBase: path.join(__dirname, "public"), // boolean | string | array, static file location
+    compress: true, // enable gzip compression
+    historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+    hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
+    https: true, // true for self-signed, object for cert authority
+    noInfo: true, // only errors & warns on hot reload
+    // ...
+  },
+ 
 };
