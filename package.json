@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@autocomplete/material-ui": "^0.0.17",
+    "@coreui/coreui": "^3.4.0",
     "@coreui/icons-react": "^1.1.0",
     "@coreui/react": "^3.4.6",
     "@coreui/react-chartjs": "^1.1.0",
@@ -42,8 +43,8 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start webpack-dev-server --inline --content-base --history-api-fallback",
+    "build": "CI= react-scripts build webpack --config prod.config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

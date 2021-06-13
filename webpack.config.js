@@ -200,7 +200,9 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: "./",
+    inline: true,
+    host: '0.0.0.0',
+    contentBase: __dirname +"/public/",
     port: 4000, // <--- Add this line and choose your own port number
   },
   devServer: {
